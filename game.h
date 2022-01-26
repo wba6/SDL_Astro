@@ -26,10 +26,10 @@ public:
 
     bool running();
 
+    static SDL_Renderer *renderer;
+
 private:
-    int counter = 0;
     bool isRunning;
     SDL_Window *window;
-    SDL_Renderer *renderer;
 };
 

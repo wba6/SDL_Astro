@@ -4,13 +4,15 @@
 
 #include "game.h"
 #include "player.h"
-player* playerOne;
+
+player *playerOne;
+SDL_Renderer *Game::renderer = nullptr;
 Game::Game() {
 
 }
 
 Game::~Game() {
-
+    delete playerOne;
 }
 
 void Game::init(const char *title, int xpos, int ypos, int width, int height, bool fullscreen) {
@@ -28,7 +30,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         }
 
         //create render
-        renderer = SDL_CreateRenderer(window, -1, 0);
+        renderer = SDL_CreateRenderer(window, -1, flags);
         if (renderer) {
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
             std::cout << "Render created" << std::endl;
@@ -38,7 +40,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     } else {
         isRunning = false;
     }
-    playerOne = new player(renderer,50,50);
+    playerOne = new player(50, 50);
 }
 
 void Game::handleEvents() {

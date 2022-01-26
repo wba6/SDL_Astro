@@ -4,11 +4,10 @@
 
 #include "player.h"
 #include "game.h"
-player::player(SDL_Renderer *ren, int x, int y) {
+player::player(int x, int y) {
     xpos = x;
     ypos = y;
-    renderer = ren;
-    playertex = textureManger::loadTexture("assets/player.png",ren);
+    playertex = textureManger::loadTexture("assets/player.png");
 }
 
 player::~player() {
@@ -29,6 +28,6 @@ void player::update() {
 }
 
 void player::render() {
-    SDL_RenderCopy(renderer, playertex, &srcRect, &destRect);
+    SDL_RenderCopy(Game::renderer, playertex, &srcRect, &destRect);
 }
 
