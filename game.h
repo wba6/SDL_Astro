@@ -4,10 +4,13 @@
 
 #pragma once
 #define SDL_ASTRO_GAME_H
+
 #include "SDL_image.h"
 #include "SDL.h"
 #include "player.h"
 #include <iostream>
+#include <vector>
+
 class Game {
 public:
     Game();
@@ -27,8 +30,9 @@ public:
     bool running();
 
     static SDL_Renderer *renderer;
-
+    static SDL_Event event;
 private:
+
     bool isRunning;
     SDL_Window *window;
 };

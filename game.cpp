@@ -7,6 +7,7 @@
 
 player *playerOne;
 SDL_Renderer *Game::renderer = nullptr;
+SDL_Event Game::event;
 Game::Game() {
 
 }
@@ -32,7 +33,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         //create render
         renderer = SDL_CreateRenderer(window, -1, flags);
         if (renderer) {
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+            SDL_SetRenderDrawColor(renderer, 160, 0, 0, 255);
             std::cout << "Render created" << std::endl;
         }
 
@@ -45,7 +46,6 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
 
 void Game::handleEvents() {
     //gets events
-    SDL_Event event;
     SDL_PollEvent(&event);
     switch (event.type) {
         case SDL_QUIT:

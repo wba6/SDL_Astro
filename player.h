@@ -8,18 +8,25 @@
 #include "SDL.h"
 #include "textureManager.h"
 #include "game.h"
-class player{
+class player {
 public:
     player(int x, int y);
 
     ~player();
+
     void update();
+
     void render();
+
 private:
+    SDL_Point spriteCenter;
+    double spriteAngle;
+    int xVelocity;
+    int yVelocity;
     int xpos;
     int ypos;
     SDL_Texture *objTexture;
     SDL_Rect srcRect, destRect;
-    SDL_Texture* playertex;
+    SDL_Texture *playertex;
 
 };

@@ -2,7 +2,7 @@
 
 int main(int argc, char* argv []) {
     //limit the frame rate
-    const int fps = 60;
+    const int fps = 120;
     const int frameDelay = 1000 / fps;
     Uint32 frameStart;
     int frameTime;
