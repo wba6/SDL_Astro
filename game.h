@@ -9,7 +9,6 @@
 #include "SDL.h"
 #include "player.h"
 #include <iostream>
-#include <vector>
 
 class Game {
 public:

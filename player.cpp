@@ -23,11 +23,13 @@ player::~player() {
 }
 
 void player::update() {
+    //gets mouse state and sets the angle that the spite should be angled at
     int mouseX;
     int mouseY;
     SDL_GetMouseState(&mouseX, &mouseY);
     spriteAngle = atan2(ypos - mouseY, xpos - mouseX);
     spriteAngle = (spriteAngle * 180.f) / 3.141f;
+    spriteAngle -= 90;
 
     if (Game::event.type == SDL_KEYDOWN) {
         switch (Game::event.key.keysym.sym) {
@@ -74,12 +76,12 @@ void player::update() {
     } else if (xVelocity == -1) {
         xpos--;
     }
+    //sets active position
     destRect.x = xpos;
     destRect.y = ypos;
 }
 
 void player::render() {
-    //SDL_RenderCopy(Game::renderer, playertex, &srcRect, &destRect);
     SDL_RenderCopyEx(Game::renderer, playertex, &srcRect, &destRect, spriteAngle, &spriteCenter, SDL_FLIP_NONE);
 }
 
