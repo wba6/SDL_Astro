@@ -1025,7 +1025,7 @@ extern "C" {
 #define SDL_HINT_QTWAYLAND_CONTENT_ORIENTATION "SDL_QTWAYLAND_CONTENT_ORIENTATION"
 
 /**
- *  \brief  Flags to set on QtWayland windows to integrate with the native window manager.
+ *  \brief  Flags to set on QtWayland windows to integrate with the native window astroidManager.
  *
  *  On QtWayland platforms, this hint controls the flags to set on the windows.
  *  For example, on Sailfish OS "OverridesSystemGestures" disables swipe gestures.
@@ -1454,7 +1454,7 @@ extern "C" {
  *
  *  By default SDL will use _NET_WM_PING, but for applications that know they
  *  will not always be able to respond to ping requests in a timely manner they can
- *  turn it off to avoid the window manager thinking the app is hung.
+ *  turn it off to avoid the window astroidManager thinking the app is hung.
  *  The hint is checked in CreateWindow.
  */
 #define SDL_HINT_VIDEO_X11_NET_WM_PING      "SDL_VIDEO_X11_NET_WM_PING"
@@ -1483,7 +1483,7 @@ extern "C" {
  *    "0"       - Disable XRandR
  *    "1"       - Enable XRandR
  *
- *  By default SDL will not use XRandR because of window manager issues.
+ *  By default SDL will not use XRandR because of window astroidManager issues.
  */
 #define SDL_HINT_VIDEO_X11_XRANDR           "SDL_VIDEO_X11_XRANDR"
 
@@ -1780,7 +1780,7 @@ extern "C" {
  *
  *  If set, this _might_ increase framerate at the expense of the desktop
  *  not working as expected. Override-redirect windows aren't noticed by the
- *  window manager at all.
+ *  window astroidManager at all.
  *
  *  You should probably only use this for fullscreen windows, and you probably
  *  shouldn't even use it for that. But it's here if you want to try!

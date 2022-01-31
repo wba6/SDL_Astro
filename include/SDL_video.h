@@ -172,7 +172,7 @@ typedef enum
     SDL_WINDOWEVENT_LEAVE,          /**< Window has lost mouse focus */
     SDL_WINDOWEVENT_FOCUS_GAINED,   /**< Window has gained keyboard focus */
     SDL_WINDOWEVENT_FOCUS_LOST,     /**< Window has lost keyboard focus */
-    SDL_WINDOWEVENT_CLOSE,          /**< The window manager requests that the window be closed */
+    SDL_WINDOWEVENT_CLOSE,          /**< The window astroidManager requests that the window be closed */
     SDL_WINDOWEVENT_TAKE_FOCUS,     /**< Window is being offered a focus (should SetWindowInputFocus() on itself or a subwindow, or ignore) */
     SDL_WINDOWEVENT_HIT_TEST,       /**< Window had a hit test that wasn't SDL_HITTEST_NORMAL. */
     SDL_WINDOWEVENT_ICCPROF_CHANGED,/**< The ICC profile of the window's display has changed. */
@@ -311,7 +311,7 @@ extern DECLSPEC const char *SDLCALL SDL_GetVideoDriver(int index);
  * Initialize the video subsystem, optionally specifying a video driver.
  *
  * This function initializes the video subsystem, setting up a connection to
- * the window manager, etc, and determines the available display modes and
+ * the window astroidManager, etc, and determines the available display modes and
  * pixel formats, but does not initialize a window or graphics mode.
  *
  * If you use this function and you haven't used the SDL_INIT_VIDEO flag with
@@ -1645,7 +1645,7 @@ typedef SDL_HitTestResult (SDLCALL *SDL_HitTest)(SDL_Window *win,
  * Provide a callback that decides if a window region has special properties.
  *
  * Normally windows are dragged and resized by decorations provided by the
- * system window manager (a title bar, borders, etc), but for some apps, it
+ * system window astroidManager (a title bar, borders, etc), but for some apps, it
  * makes sense to drag them from somewhere else inside the window itself; for
  * example, one might have a borderless window that wants to be draggable from
  * any part, or simulate its own title bar, etc.

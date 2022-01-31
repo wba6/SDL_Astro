@@ -965,7 +965,7 @@ typedef int (SDLCALL * SDL_EventFilter) (void *userdata, SDL_Event * event);
  * application at the next event poll.
  *
  * There is one caveat when dealing with the ::SDL_QuitEvent event type. The
- * event filter is only called when the window manager desires to close the
+ * event filter is only called when the window astroidManager desires to close the
  * application window. If the event filter returns 1, then the window will be
  * closed, otherwise the window will remain open if possible.
  *
