@@ -62,13 +62,13 @@ void Game::handleEvents() {
 
 void Game::update() {
     playerOne->update();
-    astroidmanager->update();
 }
 
 void Game::render() {
     //clear render buffer
     SDL_RenderClear(renderer);
     //render texture
+    astroidmanager->update();
     playerOne->render();
     //render new stuff
     SDL_RenderPresent(renderer);

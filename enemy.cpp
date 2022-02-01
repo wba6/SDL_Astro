@@ -18,10 +18,10 @@ void astroidManager::createAstroid() {
     //TODO:create an instance of astroid class with random starting position
 
 
-    double randomXSpawn = (rand() % 900);
+    /*double randomXSpawn = (rand() % 900);
     double randomYSpawn = 0;
     //get random cord and give it a random chance of being negative
-    randomXSpawn = (rand() % 10) < 5 ? randomXSpawn * -1 : randomXSpawn;
+    randomXSpawn = (rand() % 10) < 5 ? randomXSpawn * -1 : randomXSpawn;*/
 
 //    if(randomXSpawn > 0)
 //    {
@@ -36,7 +36,7 @@ void astroidManager::createAstroid() {
 //    double slopeX = windowWidth / 2.f - randomXSpawn/2.f;
     astroids *astroid = new astroids(50, 50);
     movementSlope.push_back({astroid, 50, 50});
-
+    std::cout << "astoid created" << std::endl;
 }
 
 void astroidManager::update() {
@@ -68,6 +68,7 @@ void astroids::render(double &moveY, double &moveX) {
 //    double nextY = -1 * ((moveY/moveX) * ((destRect.x - 4.f) - destRect.x)) + destRect.y;
 //    destRect.x+=4.f;
 //    destRect.y = nextY - destRect.y;
-//   std::cout<< " ||| dest x spawn: "<<destRect.x  <<" dest y spawn: "<<destRect.y<<std::endl;
+
+    std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " << destRect.y << std::endl;
     SDL_RenderCopy(Game::renderer, astroidTex, &srcRect, &destRect);
 }
