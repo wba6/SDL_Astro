@@ -15,19 +15,20 @@ public:
 
     virtual ~astroids();
 
-    void render(double &moveY, double &moveX);
+    void update(const double &slope);
+
+    void render();
 
 private:
     int xpos;
     int ypos;
-    SDL_Texture *objTexture;
     SDL_Rect srcRect, destRect;
     SDL_Texture *astroidTex;
 };
 
 struct astroidMovment {
     astroids *instance;
-    double slopeX, slopeY;
+    double slope;
 };
 
 class astroidManager {

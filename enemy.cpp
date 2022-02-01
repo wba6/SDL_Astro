@@ -15,37 +15,45 @@ astroidManager::~astroidManager() {
 }
 
 void astroidManager::createAstroid() {
-    //TODO:create an instance of astroid class with random starting position
+    //TODO:why do astoids only spawn in a few y spawn locations
+    static int frameCounter = 200;
+    if (frameCounter >= 200) {
+        double randomXSpawn = (rand() % 900);
+        double randomYSpawn = 0;
+        //get random cord and give it a random chance of being negative
+        randomXSpawn = (rand() % 10) < 5 ? randomXSpawn * -1 : randomXSpawn;
 
-
-    /*double randomXSpawn = (rand() % 900);
-    double randomYSpawn = 0;
-    //get random cord and give it a random chance of being negative
-    randomXSpawn = (rand() % 10) < 5 ? randomXSpawn * -1 : randomXSpawn;*/
-
-//    if(randomXSpawn > 0)
-//    {
-//        randomYSpawn = (windowWidth / 2.f) + std::sqrt(pow(windowHight, 2) - pow((randomXSpawn - (windowHight)),2));
-//    }else{
-//        //makes it possible to have a negative y cord if x is neg
-//        randomYSpawn = (windowWidth / 2.f) - std::sqrt(pow(windowHight, 2) - pow(((randomXSpawn*-1.f) - (windowHight)), 2));
-//        randomYSpawn *= -1.f;
-//    }
-//    std::cout<< "random x spawn: "<<randomXSpawn<<" Random y spawn: "<<randomYSpawn;
-//    double slopeY = windowHight / 2.f - randomYSpawn/2.f;
-//    double slopeX = windowWidth / 2.f - randomXSpawn/2.f;
-    astroids *astroid = new astroids(50, 50);
-    movementSlope.push_back({astroid, 50, 50});
-    std::cout << "astoid created" << std::endl;
+        if (randomXSpawn > 0) {
+            randomYSpawn =
+                    (windowWidth / 2.f) + std::sqrt(pow(windowHight, 2) - pow((randomXSpawn - (windowHight)), 2));
+        } else {
+            //makes it possible to have a negative y cord if x is neg
+            randomYSpawn = (windowWidth / 2.f) -
+                           std::sqrt(pow(windowHight, 2) - pow(((randomXSpawn * -1.f) - (windowHight)), 2));
+            randomYSpawn *= -1.f;
+        }
+        double slopeY = windowHight / 2.f - randomYSpawn / 2.f;
+        double slopeX = windowWidth / 2.f - randomXSpawn / 2.f;
+        double slope = slopeY / slopeX;
+        auto *ast = new astroids(randomXSpawn, randomYSpawn);
+        movementSlope.push_back({ast, slope});
+        std::cout << "astroid created" << std::endl;
+        frameCounter = 0;
+    } else {
+        frameCounter++;
+    }
 }
 
 void astroidManager::update() {
-    double y = 50, x = 50;
-    movementSlope.at(0).instance->render(x, y);
+    for (auto as: movementSlope) {
+        as.instance->update(as.slope);
+    }
 }
 
 void astroidManager::render() {
-
+    for (auto as: movementSlope) {
+        as.instance->render();
+    }
 }
 
 astroids::astroids(int x, int y) {
@@ -54,21 +62,23 @@ astroids::astroids(int x, int y) {
     astroidTex = textureManger::loadTexture("assets/astroid.png");
     srcRect.x = 0;
     srcRect.y = 0;
-    srcRect.w = 64;
-    srcRect.h = 64;
-    destRect.w = 64;
-    destRect.h = 64;
+    srcRect.w = destRect.w = 64;
+    srcRect.h = destRect.h = 64;
+    destRect.x = xpos;
+    destRect.y = ypos;
 }
 
 astroids::~astroids() {
 
 }
 
-void astroids::render(double &moveY, double &moveX) {
-//    double nextY = -1 * ((moveY/moveX) * ((destRect.x - 4.f) - destRect.x)) + destRect.y;
-//    destRect.x+=4.f;
-//    destRect.y = nextY - destRect.y;
-//TODO: why does it not keep track of dest rect
+void astroids::update(const double &slope) {
+    double nextY = -1 * (slope * ((destRect.x - 4.f) - destRect.x)) + destRect.y;
+    destRect.x += 4.f;
+    destRect.y = nextY - destRect.y;
+}
+
+void astroids::render() {
     std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " << destRect.y << std::endl;
     SDL_RenderCopy(Game::renderer, astroidTex, &srcRect, &destRect);
 }

@@ -6,7 +6,7 @@
 #include "player.h"
 #include "enemy.h"
 
-astroidManager *astroidmanager;
+astroidManager *astMan;
 player *playerOne;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
@@ -45,9 +45,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
         isRunning = false;
     }
     playerOne = new player(50, 50);
-    astroidmanager = new astroidManager(window);
-
-    astroidmanager->createAstroid();
+    astMan = new astroidManager(window);
+    astMan->createAstroid();
 }
 
 void Game::handleEvents() {
@@ -62,13 +61,15 @@ void Game::handleEvents() {
 
 void Game::update() {
     playerOne->update();
+    astMan->createAstroid();
+    astMan->update();
 }
 
 void Game::render() {
     //clear render buffer
     SDL_RenderClear(renderer);
     //render texture
-    astroidmanager->update();
+    astMan->render();
     playerOne->render();
     //render new stuff
     SDL_RenderPresent(renderer);
