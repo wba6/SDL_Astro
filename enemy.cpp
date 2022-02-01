@@ -68,7 +68,7 @@ void astroids::render(double &moveY, double &moveX) {
 //    double nextY = -1 * ((moveY/moveX) * ((destRect.x - 4.f) - destRect.x)) + destRect.y;
 //    destRect.x+=4.f;
 //    destRect.y = nextY - destRect.y;
-
+//TODO: why does it not keep track of dest rect
     std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " << destRect.y << std::endl;
     SDL_RenderCopy(Game::renderer, astroidTex, &srcRect, &destRect);
 }
