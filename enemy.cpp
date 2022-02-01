@@ -75,7 +75,8 @@ astroids::~astroids() {
 void astroids::update(const double &slope) {
     double nextY = -1 * (slope * ((destRect.x - 4.f) - destRect.x)) + destRect.y;
     destRect.x += 4.f;
-    destRect.y = nextY - destRect.y;
+    double movementAmountY = nextY - destRect.y;
+    destRect.y += movementAmountY;
 }
 
 void astroids::render() {
