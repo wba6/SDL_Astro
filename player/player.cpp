@@ -4,7 +4,7 @@
 
 #include <valarray>
 #include "player.h"
-#include "game.h"
+#include "../game-manager/game.h"
 player::player(int x, int y) {
     xpos = x;
     ypos = y;

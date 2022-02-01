@@ -4,8 +4,8 @@
 
 #pragma once
 
-#include "player.h"
-#include "enemy.h"
+#include "../player/player.h"
+#include "../enemy/enemy.h"
 
 class collision {
 public:

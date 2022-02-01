@@ -3,9 +3,10 @@
 //
 
 #include "game.h"
-#include "player.h"
-#include "enemy.h"
+#include "../player/player.h"
+#include "../enemy/enemy.h"
 #include "Check_collision.h"
+
 astroidManager *astMan;
 player *playerOne;
 SDL_Renderer *Game::renderer = nullptr;

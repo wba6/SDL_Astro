@@ -7,7 +7,7 @@
 
 #include "SDL_image.h"
 #include "SDL.h"
-#include "player.h"
+#include "../player/player.h"
 #include <iostream>
 
 class Game {

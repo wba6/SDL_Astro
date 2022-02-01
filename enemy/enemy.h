@@ -6,7 +6,7 @@
 #define SDL_ASTRO_ENEMY_H
 
 #include <vector>
-#include "game.h"
+#include "../game-manager/game.h"
 
 class astroids {
 public:
