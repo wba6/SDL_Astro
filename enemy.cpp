@@ -56,8 +56,9 @@ void astroidManager::render() {
     }
 }
 
-std::vector<astroidMovment> &astroidManager::getMovementSlope() {
-    return movementSlope;
+std::vector<astroidMovment> *astroidManager::getMovementSlope() {
+    std::vector<astroidMovment> *movementTemp = &movementSlope;
+    return movementTemp;
 }
 
 astroids::astroids(int x, int y) {
@@ -86,6 +87,8 @@ void astroids::render() {
     SDL_RenderCopy(Game::renderer, astroidTex, &srcRect, &destRect);
 }
 
-const SDL_Rect &astroids::getDestRect() const {
-    return destRect;
+SDL_Rect *astroids::getDestRect() {
+    SDL_Rect *temp = &destRect;
+    return temp;
 }
+

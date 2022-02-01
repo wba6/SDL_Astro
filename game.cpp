@@ -63,7 +63,7 @@ void Game::update() {
     playerOne->update();
     astMan->createAstroid();
     astMan->update();
-    collision::checkCollision(astMan->getMovementSlope(), *(playerOne));
+    collision::checkCollision(astMan->getMovementSlope(), playerOne);
 }
 
 void Game::render() {

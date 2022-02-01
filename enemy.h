@@ -19,7 +19,7 @@ public:
 
     void render();
 
-    const SDL_Rect &getDestRect() const;
+   SDL_Rect *getDestRect();
 
 private:
     SDL_Rect srcRect, destRect;
@@ -43,7 +43,7 @@ public:
 
     void render();
 
-    std::vector<astroidMovment> &getMovementSlope();
+    std::vector<astroidMovment> *getMovementSlope();
 
 private:
     int windowWidth;

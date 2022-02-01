@@ -18,7 +18,7 @@ public:
 
     void render();
 
-    const SDL_Rect &getDestRect() const;
+    SDL_Rect *getDestRect();
 
 private:
     SDL_Point spriteCenter;
