@@ -25,8 +25,8 @@ private:
     int yVelocity;
     int xpos;
     int ypos;
-    SDL_Texture *objTexture;
     SDL_Rect srcRect, destRect;
     SDL_Texture *playertex;
+
 
 };

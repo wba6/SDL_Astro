@@ -8,13 +8,31 @@
 #include <vector>
 #include "game.h"
 
+class astroids {
+public:
+
+    astroids(int x, int y);
+
+    virtual ~astroids();
+
+    void render(double &moveY, double &moveX);
+
+private:
+    int xpos;
+    int ypos;
+    SDL_Texture *objTexture;
+    SDL_Rect srcRect, destRect;
+    SDL_Texture *astroidTex;
+};
+
 struct astroidMovment {
-    double instance, xSlope, ySlope;
+    astroids *instance;
+    double slopeX, slopeY;
 };
 
 class astroidManager {
 public:
-    astroidManager();
+    astroidManager(SDL_Window *window);
 
     ~astroidManager();
 
@@ -25,10 +43,9 @@ public:
     void render();
 
 private:
-
+    int windowWidth;
+    int windowHight;
     std::vector<astroidMovment> movementSlope;
 };
 
-class astroids : public astroidManager {
 
-};
