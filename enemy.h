@@ -20,8 +20,6 @@ public:
     void render();
 
 private:
-    int xpos;
-    int ypos;
     SDL_Rect srcRect, destRect;
     SDL_Texture *astroidTex;
 };

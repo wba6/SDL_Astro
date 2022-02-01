@@ -57,15 +57,13 @@ void astroidManager::render() {
 }
 
 astroids::astroids(int x, int y) {
-    xpos = x;
-    ypos = y;
     astroidTex = textureManger::loadTexture("assets/astroid.png");
     srcRect.x = 0;
     srcRect.y = 0;
     srcRect.w = destRect.w = 64;
     srcRect.h = destRect.h = 64;
-    destRect.x = xpos;
-    destRect.y = ypos;
+    destRect.x = x;
+    destRect.y = y;
 }
 
 astroids::~astroids() {
