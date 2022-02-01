@@ -19,6 +19,8 @@ public:
 
     void render();
 
+    const SDL_Rect &getDestRect() const;
+
 private:
     SDL_Rect srcRect, destRect;
     SDL_Texture *astroidTex;
@@ -40,6 +42,8 @@ public:
     void update();
 
     void render();
+
+    std::vector<astroidMovment> &getMovementSlope();
 
 private:
     int windowWidth;

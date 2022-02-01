@@ -85,3 +85,7 @@ void player::render() {
     SDL_RenderCopyEx(Game::renderer, playertex, &srcRect, &destRect, spriteAngle, &spriteCenter, SDL_FLIP_NONE);
 }
 
+const SDL_Rect &player::getDestRect() const {
+    return destRect;
+}
+

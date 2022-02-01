@@ -18,6 +18,8 @@ public:
 
     void render();
 
+    const SDL_Rect &getDestRect() const;
+
 private:
     SDL_Point spriteCenter;
     double spriteAngle;

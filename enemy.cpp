@@ -56,6 +56,10 @@ void astroidManager::render() {
     }
 }
 
+std::vector<astroidMovment> &astroidManager::getMovementSlope() {
+    return movementSlope;
+}
+
 astroids::astroids(int x, int y) {
     astroidTex = textureManger::loadTexture("assets/astroid.png");
     srcRect.x = 0;
@@ -80,4 +84,8 @@ void astroids::update(const double &slope) {
 void astroids::render() {
     std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " << destRect.y << std::endl;
     SDL_RenderCopy(Game::renderer, astroidTex, &srcRect, &destRect);
+}
+
+const SDL_Rect &astroids::getDestRect() const {
+    return destRect;
 }
