@@ -15,7 +15,7 @@ astroidManager::~astroidManager() {
 }
 
 void astroidManager::createAstroid() {
-    //TODO:why do astoids only spawn in a few y spawn locations
+    //TODO:Impliment collision
     static int frameCounter = 200;
     if (frameCounter >= 200) {
         double randomXSpawn = (rand() % 900);
