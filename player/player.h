@@ -9,7 +9,7 @@
 #include "SDL.h"
 #include "../game-manager/textureManager.h"
 #include "../game-manager/game.h"
-
+#include "../projectiles/projectiles.h"
 class player {
 public:
     player(int x, int y);
@@ -31,6 +31,5 @@ private:
     int ypos;
     SDL_Rect srcRect, destRect;
     SDL_Texture *playertex;
-
 
 };

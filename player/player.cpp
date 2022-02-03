@@ -5,6 +5,7 @@
 #include <valarray>
 #include "player.h"
 #include "../game-manager/game.h"
+projectileManager *projectileM;
 player::player(int x, int y) {
     xpos = x;
     ypos = y;
@@ -16,6 +17,7 @@ player::player(int x, int y) {
     destRect.w = 64;
     destRect.h = 64;
     spriteCenter = {28, 0};
+    projectileM = new projectileManager();
 }
 
 player::~player() {
@@ -30,7 +32,10 @@ void player::update() {
     spriteAngle = atan2(ypos - mouseY, xpos - mouseX);
     spriteAngle = (spriteAngle * 180.f) / 3.141f;
     spriteAngle -= 90;
-
+    projectileM->newProjectile(destRect, spriteAngle, mouseX, mouseY);
+    for (auto pro: projectileM->projectiles) {
+        pro->update();
+    }
     if (Game::event.type == SDL_KEYDOWN) {
         switch (Game::event.key.keysym.sym) {
             case SDLK_w:
