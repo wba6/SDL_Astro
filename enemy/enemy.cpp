@@ -15,9 +15,9 @@ astroidManager::~astroidManager() {
 }
 
 void astroidManager::createAstroid() {
-    //TODO:Impliment collision
-    static int frameCounter = 200;
-    if (frameCounter >= 200) {
+    static int frameCounter = 50;
+    if (frameCounter >= 50) {
+
         double randomXSpawn = (rand() % 900);
         double randomYSpawn = 0;
         //get random cord and give it a random chance of being negative
@@ -83,7 +83,7 @@ void astroids::update(const double &slope) {
 }
 
 void astroids::render() {
-    std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " << destRect.y << std::endl;
+    //std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " << destRect.y << std::endl;
     SDL_RenderCopy(Game::renderer, astroidTex, &srcRect, &destRect);
 }
 

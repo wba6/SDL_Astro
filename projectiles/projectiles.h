@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "../game-manager/game.h"
-
+//TODO: implement collision
 struct positionManager {
     int x, y;
 };

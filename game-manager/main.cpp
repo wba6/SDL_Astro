@@ -6,7 +6,7 @@ int main(int argc, char* argv []) {
     const int frameDelay = 1000 / fps;
     Uint32 frameStart;
     int frameTime;
-
+    srand(time(NULL));
 
     Game *game = nullptr;
     game = new Game();
