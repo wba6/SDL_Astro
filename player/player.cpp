@@ -5,7 +5,7 @@
 #include <valarray>
 #include "player.h"
 #include "../game-manager/game.h"
-
+projectileManager *proMan;
 player::player(int x, int y) {
     xpos = x;
     ypos = y;
@@ -17,6 +17,7 @@ player::player(int x, int y) {
     destRect.w = 64;
     destRect.h = 64;
     spriteCenter = {28, 0};
+    proMan = new projectileManager();
 }
 
 player::~player() {
@@ -31,6 +32,24 @@ void player::update() {
     spriteAngle = atan2(ypos - mouseY, xpos - mouseX);
     spriteAngle = (spriteAngle * 180.f) / 3.141f;
     spriteAngle -= 90;
+    /*
+     * spawns new projectiles and updates them
+     * */
+    //TODO: Only shoot when player clicks left mouse button
+    static int spawnRate{120};
+    if (spawnRate >= 120) {
+        projectile *shoot = new projectile(destRect, spriteAngle, mouseX, mouseY);
+        proMan->projectiles.push_back(shoot);
+        spawnRate = 0;
+    } else {
+        spawnRate++;
+    }
+    for (auto inst: proMan->projectiles) {
+        inst->update();
+    }
+    /*
+     * checks for keyboard input and applies directional movement
+     * */
     if (Game::event.type == SDL_KEYDOWN) {
         switch (Game::event.key.keysym.sym) {
             case SDLK_w:
@@ -83,6 +102,10 @@ void player::update() {
 
 void player::render() {
     SDL_RenderCopyEx(Game::renderer, playertex, &srcRect, &destRect, spriteAngle, &spriteCenter, SDL_FLIP_NONE);
+    //renders all projectiles
+    for (auto instRender: proMan->projectiles) {
+        instRender->render();
+    }
 }
 
 SDL_Rect *player::getDestRect() {

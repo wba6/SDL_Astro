@@ -34,7 +34,7 @@ private:
 
 class projectileManager {
 public:
-    void newProjectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY);
+     void newProjectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY);
 
     std::vector<projectile *> projectiles;
 };

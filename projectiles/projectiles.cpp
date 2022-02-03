@@ -9,12 +9,16 @@ projectile::projectile(const SDL_Rect &playerPos, double &angle, const int &mous
     srcRect.y = 0;
     srcRect.w = 64;
     srcRect.h = 64;
+    destRect.w = 8;
+    destRect.h = 16;
+    destRect.x = destRect.y = 64;
+
     destRect.y = playerPos.y;
     destRect.x = playerPos.x;
 
     rectAngle = angle;
-    velocity.y = (mousePosY - playerPos.y);
-    velocity.x = (mousePosX - playerPos.x);
+    velocity.y = (mousePosY - playerPos.y) / 20;
+    velocity.x = (mousePosX - playerPos.x) / 20;
 }
 
 projectile::~projectile() {
@@ -24,12 +28,12 @@ projectile::~projectile() {
 void projectile::update() {
     destRect.x += velocity.x;
     destRect.y += velocity.y;
-    this->render();
 }
 
 void projectile::render() {
-    std::cout << "projectile rendered at " << destRect.x << " " << destRect.y << std::endl;
-    SDL_RenderDrawRect(Game::renderer, &destRect);
+    SDL_SetRenderDrawColor(Game::renderer, 255, 255, 0, 255);
+    SDL_RenderFillRect(Game::renderer, &destRect);
+    SDL_SetRenderDrawColor(Game::renderer, 200, 0, 0, 255);
 }
 
 

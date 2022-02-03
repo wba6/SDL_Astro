@@ -11,7 +11,6 @@ astroidManager *astMan;
 player *playerOne;
 SDL_Renderer *Game::renderer = nullptr;
 SDL_Event Game::event;
-
 Game::Game() {
 
 }
@@ -48,6 +47,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     playerOne = new player(50, 50);
     astMan = new astroidManager(window);
     astMan->createAstroid();
+
 }
 
 void Game::handleEvents() {
