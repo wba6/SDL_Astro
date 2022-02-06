@@ -9,7 +9,7 @@
 #include "SDL.h"
 #include "../game-manager/textureManager.h"
 #include "../game-manager/game.h"
-#include "../projectiles/projectiles.h"
+#include <vector>
 class player {
 public:
     player(int x, int y);
@@ -22,6 +22,7 @@ public:
 
     SDL_Rect *getDestRect();
 
+    std::vector<projectile *> *getproMan();
 private:
     SDL_Point spriteCenter;
     double spriteAngle;

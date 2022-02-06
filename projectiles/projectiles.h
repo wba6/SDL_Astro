@@ -7,6 +7,8 @@
 
 #include <vector>
 #include "../game-manager/game.h"
+
+
 //TODO: implement collision
 struct positionManager {
     int x, y;
@@ -22,6 +24,7 @@ public:
 
     void render();
 
+    SDL_Rect *getDestRect();
 
 private:
 
@@ -34,7 +37,9 @@ private:
 
 class projectileManager {
 public:
-     void newProjectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY);
+    void newProjectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY);
 
     std::vector<projectile *> projectiles;
+
+    std::vector<projectile *> *getProjectiles();
 };

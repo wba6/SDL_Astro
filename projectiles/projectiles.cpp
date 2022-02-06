@@ -36,9 +36,18 @@ void projectile::render() {
     SDL_SetRenderDrawColor(Game::renderer, 200, 0, 0, 255);
 }
 
+SDL_Rect *projectile::getDestRect() {
+    return &destRect;
+}
+
 
 void
 projectileManager::newProjectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY) {
     projectile *newProject = new projectile(playerPos, angle, mousePosX, mousePosY);
     projectiles.push_back(newProject);
+
+}
+
+std::vector<projectile *> *projectileManager::getProjectiles() {
+    return &projectiles;
 }

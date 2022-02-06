@@ -9,7 +9,7 @@
 #include "SDL.h"
 #include "../player/player.h"
 #include <iostream>
-
+#include "../projectiles/projectiles.h"
 class Game {
 public:
     Game();

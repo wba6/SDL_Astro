@@ -6,7 +6,7 @@
 #include "../player/player.h"
 #include "../enemy/enemy.h"
 #include "Check_collision.h"
-
+#include <vector>
 astroidManager *astMan;
 player *playerOne;
 SDL_Renderer *Game::renderer = nullptr;
@@ -65,6 +65,7 @@ void Game::update() {
     astMan->createAstroid();
     astMan->update();
     collision::checkCollision(astMan->getMovementSlope(), playerOne);
+    collision::checkCollision(astMan->getMovementSlope(), playerOne->getproMan());
 }
 
 void Game::render() {

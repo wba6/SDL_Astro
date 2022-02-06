@@ -4,8 +4,10 @@
 
 #include <valarray>
 #include "player.h"
-#include "../game-manager/game.h"
+#include "../game-manager/Check_collision.h"
+
 projectileManager *proMan;
+
 player::player(int x, int y) {
     xpos = x;
     ypos = y;
@@ -111,5 +113,10 @@ void player::render() {
 SDL_Rect *player::getDestRect() {
     SDL_Rect *temp = &destRect;
     return temp;
+}
+
+std::vector<projectile *> *player::getproMan() {
+    //returns a pointer to the vector
+    return proMan->getProjectiles();
 }
 
