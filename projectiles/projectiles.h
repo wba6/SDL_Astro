@@ -39,7 +39,7 @@ class projectileManager {
 public:
     void newProjectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY);
 
-    std::vector<projectile *> projectiles;
+    static std::vector<projectile *> projectiles;
 
     std::vector<projectile *> *getProjectiles();
 };

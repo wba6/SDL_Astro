@@ -3,7 +3,7 @@
 //
 
 #pragma once
-
+#include "game.h"
 #include "../player/player.h"
 #include "../enemy/enemy.h"
 #include "../projectiles/projectiles.h"

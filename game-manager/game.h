@@ -10,6 +10,10 @@
 #include "../player/player.h"
 #include <iostream>
 #include "../projectiles/projectiles.h"
+#include "../enemy/enemy.h"
+#include "Check_collision.h"
+#include <vector>
+
 class Game {
 public:
     Game();

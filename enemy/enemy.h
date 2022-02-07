@@ -7,7 +7,7 @@
 
 #include <vector>
 #include "../game-manager/game.h"
-
+#include <valarray>
 class astroids {
 public:
 

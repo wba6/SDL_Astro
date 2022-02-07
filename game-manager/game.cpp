@@ -3,10 +3,6 @@
 //
 
 #include "game.h"
-#include "../player/player.h"
-#include "../enemy/enemy.h"
-#include "Check_collision.h"
-#include <vector>
 astroidManager *astMan;
 player *playerOne;
 SDL_Renderer *Game::renderer = nullptr;

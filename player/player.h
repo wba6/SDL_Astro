@@ -8,7 +8,7 @@
 #include "SDL_image.h"
 #include "SDL.h"
 #include "../game-manager/textureManager.h"
-#include "../game-manager/game.h"
+#include <valarray>
 #include <vector>
 class player {
 public:
