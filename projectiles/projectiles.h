@@ -3,10 +3,9 @@
 //
 
 #pragma once
-#define SDL_ASTRO_PROJECTILES_H
 
 #include <vector>
-#include "../game-manager/game.h"
+#include <SDL2/SDL_rect.h>
 
 
 //TODO: implement collision

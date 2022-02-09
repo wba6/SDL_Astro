@@ -3,6 +3,9 @@
 //
 
 #include "projectiles.h"
+#include "../game-manager/game.h"
+
+std::vector<projectile*> projectileManager::projectiles;
 
 projectile::projectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY) {
     srcRect.x = 0;

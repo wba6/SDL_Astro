@@ -13,7 +13,4 @@ add_executable(SDL_Astro game-manager/main.cpp game-manager/game.cpp game-manage
 target_link_libraries(${PROJECT_NAME}
         SDL2main
         SDL2
-        SDL2_image
-        zlib1
-        libpng16-16
-        libjpeg-9)
+        SDL2_image)

@@ -3,7 +3,7 @@
 //
 
 #include "player.h"
-
+#include "../game-manager/textureManager.h"
 
 projectileManager *proMan;
 

@@ -2,7 +2,9 @@
 // Created by William Aey on 1/31/2022.
 //
 
+#include <iostream>
 #include "enemy.h"
+#include "../game-manager/textureManager.h"
 
 
 astroidManager::astroidManager(SDL_Window *window) {

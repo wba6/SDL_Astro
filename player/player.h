@@ -3,13 +3,12 @@
 //
 
 #pragma once
-#define SDL_ASTRO_PLAYER_H
 
-#include "SDL_image.h"
-#include "SDL.h"
-#include "../game-manager/textureManager.h"
+#include "SDL2/SDL_image.h"
+#include "SDL2/SDL.h"
 #include <valarray>
 #include <vector>
+#include "../projectiles/projectiles.h"
 class player {
 public:
     player(int x, int y);
