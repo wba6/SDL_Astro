@@ -14,6 +14,4 @@ target_link_libraries(${PROJECT_NAME}
         SDL2main
         SDL2
         SDL2_image
-        zlib1
-        libpng16-16
-        libjpeg-9)
+        )
