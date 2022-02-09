@@ -36,8 +36,8 @@ void player::update() {
      * spawns new projectiles and updates them
      * */
     //TODO: Only shoot when player clicks left mouse button
-    static int spawnRate{120};
-    if (spawnRate >= 120) {
+    static int spawnRate{60};
+    if (spawnRate >= 60) {
         projectile *shoot = new projectile(destRect, spriteAngle, mouseX, mouseY);
         proMan->projectiles.push_back(shoot);
         spawnRate = 0;
