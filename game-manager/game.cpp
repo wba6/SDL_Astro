@@ -24,6 +24,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height, bo
     //checks if fullscreen is true
     flags = fullscreen ? SDL_WINDOW_FULLSCREEN : 0;
     //checks to make sure that the system is initialized correctly before making a window
+
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         std::cout << "subsystem running" << std::endl;
 
