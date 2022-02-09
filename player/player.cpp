@@ -2,8 +2,8 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
-#include "player.h"
-#include "../game-manager/textureManager.h"
+#include <Astro/player.h>
+#include <Astro/textureManager.h>
 
 projectileManager *proMan;
 

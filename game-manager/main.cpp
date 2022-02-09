@@ -1,5 +1,5 @@
 #include <ctime>
-#include "game.h"
+#include <Astro/game.h>
 
 int main(int argc, char* argv []) {
     //limit the frame rate

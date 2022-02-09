@@ -6,10 +6,10 @@
 
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL.h"
-#include "../player/player.h"
+#include "player.h"
 #include <iostream>
-#include "../projectiles/projectiles.h"
-#include "../enemy/enemy.h"
+#include "projectiles.h"
+#include "enemy.h"
 #include "Check_collision.h"
 #include <vector>
 

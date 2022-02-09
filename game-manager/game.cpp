@@ -2,7 +2,7 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
-#include "game.h"
+#include <Astro/game.h>
 astroidManager *astMan;
 player *playerOne;
 SDL_Renderer *Game::renderer = nullptr;

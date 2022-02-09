@@ -2,8 +2,8 @@
 // Created by William Aey on 2/3/2022.
 //
 
-#include "projectiles.h"
-#include "../game-manager/game.h"
+#include <Astro/projectiles.h>
+#include <Astro/game.h>
 
 std::vector<projectile*> projectileManager::projectiles;
 

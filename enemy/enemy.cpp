@@ -3,8 +3,8 @@
 //
 
 #include <iostream>
-#include "enemy.h"
-#include "../game-manager/textureManager.h"
+#include <Astro/enemy.h>
+#include <Astro/textureManager.h>
 
 
 astroidManager::astroidManager(SDL_Window *window) {

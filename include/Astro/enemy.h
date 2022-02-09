@@ -3,7 +3,6 @@
 //
 
 #pragma once
-#define SDL_ASTRO_ENEMY_H
 
 #include <vector>
 #include <valarray>

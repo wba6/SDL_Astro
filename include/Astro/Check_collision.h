@@ -3,9 +3,9 @@
 //
 
 #pragma once
-#include "../player/player.h"
-#include "../enemy/enemy.h"
-#include "../projectiles/projectiles.h"
+#include "player.h"
+#include "enemy.h"
+#include "projectiles.h"
 class collision {
 public:
     static void checkCollision(std::vector<astroidMovment> *movementSlope, player *pla);

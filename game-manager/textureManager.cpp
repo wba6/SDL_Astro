@@ -2,7 +2,7 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
-#include "textureManager.h"
+#include <Astro/textureManager.h>
 
 
 SDL_Texture *textureManger::loadTexture(const char *fileName) {

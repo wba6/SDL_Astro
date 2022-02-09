@@ -2,7 +2,7 @@
 // Created by William Aey on 2/1/2022.
 //
 
-#include "Check_collision.h"
+#include <Astro/Check_collision.h>
 
 
 void collision::checkCollision(std::vector<astroidMovment> *movementSlope, player *pla) {

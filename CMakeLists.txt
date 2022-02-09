@@ -10,16 +10,11 @@ add_executable(
   SDL_Astro
   game-manager/main.cpp
   game-manager/game.cpp
-  game-manager/game.h
   game-manager/textureManager.cpp
-  game-manager/textureManager.h
   player/player.cpp
-  player/player.h
   enemy/enemy.cpp
-  enemy/enemy.h
+  projectiles/projectiles.cpp
   game-manager/Check_collision.cpp
-  game-manager/Check_collision.h
-  projectiles/projectiles.cpp projectiles/projectiles.h
 )
 
 target_link_libraries(
