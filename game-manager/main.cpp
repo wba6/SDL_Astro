@@ -12,6 +12,9 @@ int main(int argc, char* argv []) {
     Game *game = nullptr;
     game = new Game();
     game->init("window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+    if(IMG_Init(IMG_INIT_PNG) != IMG_INIT_PNG){
+        std::cout<<"did not init img png"<<std::endl;
+    }
 
     while (game->running()) {
         //amount of ticks from when sdl was init
