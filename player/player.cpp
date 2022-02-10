@@ -22,30 +22,32 @@ player::player(Game *game, int x, int y) : game(game) {
 player::~player() {}
 
 void player::update() {
-  // gets mouse state and sets the angle that the spite should be angled at
-  int mouseX;
-  int mouseY;
-  SDL_GetMouseState(&mouseX, &mouseY);
-  spriteAngle = atan2(ypos - mouseY, xpos - mouseX);
-  spriteAngle = (spriteAngle * 180.f) / 3.141f;
-  spriteAngle -= 90;
-  /*
-   * spawns new Manageprojectiles and updates them
-   * */
-  // TODO: Only shoot when player clicks left mouse button
-  static int spawnRate{120};
-  if (spawnRate >= 120) {
-    projectile *shoot = new projectile(game, destRect, spriteAngle, mouseX, mouseY);
-    game->addProjectile(shoot);
-    spawnRate = 0;
-  } else {
-    spawnRate++;
-  }
-  /*
-   * checks for keyboard input and applies directional movement
-   * */
+    // gets mouse state and sets the angle that the spite should be angled at
+    int mouseX;
+    int mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+    spriteAngle = atan2(ypos - mouseY, xpos - mouseX);
+    spriteAngle = (spriteAngle * 180.f) / 3.141f;
+    spriteAngle -= 90;
+
+/*
+ * spawns new projectiles when left mouse is pressed
+ * */
+    static int spawnRate{60};
+    if (spawnRate >= 60) {
+        if (SDL_GetMouseState(&mouseX, &mouseY) == 1) {
+            projectile *shoot = new projectile(game, destRect, spriteAngle, mouseX, mouseY);
+            game->addProjectile(shoot);
+            spawnRate = 0;
+        }
+    } else {
+        spawnRate++;
+    }
+    /*
+     * checks for keyboard input and applies directional movement
+     * */
     int numKeys;
-    const Uint8* keys = SDL_GetKeyboardState(&numKeys);
+    const Uint8 *keys = SDL_GetKeyboardState(&numKeys);
     if (keys[SDL_SCANCODE_W]) {
         yVelocity = -1;
     } else if (keys[SDL_SCANCODE_S]) {
