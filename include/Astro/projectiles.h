@@ -47,6 +47,7 @@ public:
 
   void newProjectile(const SDL_Rect &playerPos, double &angle,
                      const int &mousePosX, const int &mousePosY);
-
+  void RenderProjectiles();
+  void update();
   std::vector<projectile *> *getProjectiles();
 };

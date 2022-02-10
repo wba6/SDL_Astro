@@ -6,7 +6,7 @@
 
 astroidManager *astMan;
 player *playerOne;
-Game::Game() : textures(this), projectiles(this) {}
+Game::Game() : textures(this), Manageprojectiles(this) {}
 
 Game::~Game() { delete playerOne; }
 
@@ -56,19 +56,22 @@ void Game::update() {
   playerOne->update();
   astMan->createAstroid();
   astMan->update();
+  Manageprojectiles.update();
   collision::checkCollision(astMan->getMovementSlope(), playerOne);
   collision::checkCollision(astMan->getMovementSlope(),
-                            projectiles.getProjectiles());
+                            Manageprojectiles.getProjectiles());
 }
 
 void Game::addProjectile(projectile *p) {
-  projectiles.projectiles.push_back(p);
+    std::cout<<"add projectile"<<std::endl;
+  Manageprojectiles.projectiles.push_back(p);
 }
 
 void Game::render() {
   // clear render buffer
   SDL_RenderClear(renderer);
   // render texture
+  Manageprojectiles.RenderProjectiles();
   astMan->render();
   playerOne->render();
   // render new stuff

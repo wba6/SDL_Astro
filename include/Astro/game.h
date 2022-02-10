@@ -43,5 +43,5 @@ private:
   bool isRunning;
   SDL_Window *window;
 
-  projectileManager projectiles;
+  projectileManager Manageprojectiles;
 };

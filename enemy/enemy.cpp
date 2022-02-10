@@ -38,7 +38,6 @@ void astroidManager::createAstroid() {
     double slope = slopeY / slopeX;
     auto *ast = new astroids(game, randomXSpawn, randomYSpawn);
     movementSlope.push_back({ast, slope});
-    std::cout << "astroid created" << std::endl;
     frameCounter = 0;
   } else {
     frameCounter++;
@@ -82,8 +81,6 @@ void astroids::update(const double &slope) {
 }
 
 void astroids::render() {
-  // std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " <<
-  // destRect.y << std::endl;
   SDL_RenderCopy(game->renderer, astroidTex, &srcRect, &destRect);
 }
 

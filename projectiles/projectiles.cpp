@@ -52,3 +52,15 @@ void projectileManager::newProjectile(const SDL_Rect &playerPos, double &angle,
 std::vector<projectile *> *projectileManager::getProjectiles() {
   return &projectiles;
 }
+
+void projectileManager::RenderProjectiles() {
+  for(auto inst: projectiles){
+    inst->render();
+  }
+}
+
+void projectileManager::update() {
+  for(auto inst: projectiles){
+    inst->update();
+  }
+}

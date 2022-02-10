@@ -30,7 +30,7 @@ void player::update() {
   spriteAngle = (spriteAngle * 180.f) / 3.141f;
   spriteAngle -= 90;
   /*
-   * spawns new projectiles and updates them
+   * spawns new Manageprojectiles and updates them
    * */
   // TODO: Only shoot when player clicks left mouse button
   static int spawnRate{120};
@@ -44,39 +44,23 @@ void player::update() {
   /*
    * checks for keyboard input and applies directional movement
    * */
-  if (game->event.type == SDL_KEYDOWN) {
-    switch (game->event.key.keysym.sym) {
-    case SDLK_w:
-      yVelocity = -1;
-      break;
-    case SDLK_s:
-      yVelocity = 1;
-      break;
-    case SDLK_a:
-      xVelocity = -1;
-      break;
-    case SDLK_d:
-      xVelocity = 1;
-      break;
+    int numKeys;
+    const Uint8* keys = SDL_GetKeyboardState(&numKeys);
+    if (keys[SDL_SCANCODE_W]) {
+        yVelocity = -1;
+    } else if (keys[SDL_SCANCODE_S]) {
+        yVelocity = 1;
+    } else {
+        yVelocity = 0;
     }
-  }
 
-  if (game->event.type == SDL_KEYUP) {
-    switch (game->event.key.keysym.sym) {
-    case SDLK_w:
-      yVelocity = 0;
-      break;
-    case SDLK_s:
-      yVelocity = 0;
-      break;
-    case SDLK_a:
-      xVelocity = 0;
-      break;
-    case SDLK_d:
-      xVelocity = 0;
-      break;
+    if (keys[SDL_SCANCODE_A]) {
+        xVelocity = -1;
+    } else if (keys[SDL_SCANCODE_D]) {
+        xVelocity = 1;
+    } else {
+        xVelocity = 0;
     }
-  }
 
   if (yVelocity == 1) {
     ypos++;
