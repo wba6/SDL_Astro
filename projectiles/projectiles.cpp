@@ -63,4 +63,18 @@ void projectileManager::update() {
   for(auto inst: projectiles){
     inst->update();
   }
+    for (int i = 0; i < projectiles.size(); ++i) {
+        int x, y{0};
+        SDL_GetWindowSize(game->getWindow(), &x, &y);
+        for (int i = 0; i < projectiles.size(); ++i) {
+            SDL_Rect *location = projectiles.at(i)->getDestRect();
+            if (location->x > x + 1000 || location->x < x - 1000) {
+                projectiles.erase(projectiles.begin() + i);
+                i--;
+            } else if (location->y > y + 1000 || location->y < y - 1000) {
+                projectiles.erase(projectiles.begin() + i);
+                i--;
+            }
+        }
+    }
 }
