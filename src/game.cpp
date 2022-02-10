@@ -4,8 +4,6 @@
 
 #include "Astro/game.h"
 
-astroidManager *astMan;
-player *playerOne;
 Game::Game() : textures(this), Manageprojectiles(this),lost(false) {}
 
 Game::~Game() { delete playerOne; }
