@@ -16,7 +16,7 @@ class player {
   Game *game;
 
 public:
-  player(Game *game, int x, int y);
+  explicit player(Game *game, int x, int y);
 
   ~player();
 

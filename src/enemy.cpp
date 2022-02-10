@@ -21,7 +21,7 @@ void astroidManager::createAstroid() {
     double randomYSpawn = 0;
     // get random cord and give it a random chance of being negative
     randomXSpawn = (rand() % 10) < 5 ? randomXSpawn * -1 : randomXSpawn;
-
+    //uses equation of a circle to find spawn locations
     if (randomXSpawn > 0) {
       randomYSpawn = (windowWidth / 2.f) +
                      std::sqrt(pow(windowHight, 2) -
@@ -48,6 +48,9 @@ void astroidManager::update() {
     for (auto as: movementSlope) {
         as.instance->update(as.slope);
     }
+    /*
+   * deletes out of range astroids
+   * */
     int x, y{0};
     SDL_GetWindowSize(game->getWindow(), &x, &y);
     for (int i = 0; i < movementSlope.size(); ++i) {

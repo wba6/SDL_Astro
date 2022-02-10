@@ -60,9 +60,12 @@ void projectileManager::RenderProjectiles() {
 }
 
 void projectileManager::update() {
-  for(auto inst: projectiles){
-    inst->update();
-  }
+    for (auto inst: projectiles) {
+        inst->update();
+    }
+    /*
+     * deletes out of range projectiles
+     * */
     for (int i = 0; i < projectiles.size(); ++i) {
         int x, y{0};
         SDL_GetWindowSize(game->getWindow(), &x, &y);
