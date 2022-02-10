@@ -2,8 +2,11 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
+#include <SDL2/SDL_events.h>
+#include <SDL2/SDL_keycode.h>
 #include <valarray>
 #include "player.h"
+#include <SDL2/SDL.h>
 #include "../game-manager/game.h"
 projectileManager *proMan;
 player::player(int x, int y) {
@@ -50,38 +53,22 @@ void player::update() {
     /*
      * checks for keyboard input and applies directional movement
      * */
-    if (Game::event.type == SDL_KEYDOWN) {
-        switch (Game::event.key.keysym.sym) {
-            case SDLK_w:
-                yVelocity = -1;
-                break;
-            case SDLK_s:
-                yVelocity = 1;
-                break;
-            case SDLK_a:
-                xVelocity = -1;
-                break;
-            case SDLK_d:
-                xVelocity = 1;
-                break;
-        }
+    int numKeys;
+    const Uint8* keys = SDL_GetKeyboardState(&numKeys);
+    if (keys[SDL_SCANCODE_W]) {
+        yVelocity = -1;
+    } else if (keys[SDL_SCANCODE_S]) {
+        yVelocity = 1;
+    } else {
+        yVelocity = 0;
     }
 
-    if (Game::event.type == SDL_KEYUP) {
-        switch (Game::event.key.keysym.sym) {
-            case SDLK_w:
-                yVelocity = 0;
-                break;
-            case SDLK_s:
-                yVelocity = 0;
-                break;
-            case SDLK_a:
-                xVelocity = 0;
-                break;
-            case SDLK_d:
-                xVelocity = 0;
-                break;
-        }
+    if (keys[SDL_SCANCODE_A]) {
+        xVelocity = -1;
+    } else if (keys[SDL_SCANCODE_D]) {
+        xVelocity = 1;
+    } else {
+        xVelocity = 0;
     }
 
     if (yVelocity == 1) {
