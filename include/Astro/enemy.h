@@ -4,51 +4,48 @@
 
 #pragma once
 
-#include <vector>
-#include <valarray>
-#include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
+#include <SDL2/SDL_video.h>
+#include <valarray>
+#include <vector>
 class astroids {
 public:
+  astroids(int x, int y);
 
-    astroids(int x, int y);
+  virtual ~astroids();
 
-    virtual ~astroids();
+  void update(const double &slope);
 
-    void update(const double &slope);
+  void render();
 
-    void render();
-
-   SDL_Rect *getDestRect();
+  SDL_Rect *getDestRect();
 
 private:
-    SDL_Rect srcRect, destRect;
-    SDL_Texture *astroidTex;
+  SDL_Rect srcRect, destRect;
+  SDL_Texture *astroidTex;
 };
 
 struct astroidMovment {
-    astroids *instance;
-    double slope;
+  astroids *instance;
+  double slope;
 };
 
 class astroidManager {
 public:
-    astroidManager(SDL_Window *window);
+  astroidManager(SDL_Window *window);
 
-    ~astroidManager();
+  ~astroidManager();
 
-    void createAstroid();
+  void createAstroid();
 
-    void update();
+  void update();
 
-    void render();
+  void render();
 
-    std::vector<astroidMovment> *getMovementSlope();
+  std::vector<astroidMovment> *getMovementSlope();
 
 private:
-    int windowWidth;
-    int windowHight;
-    std::vector<astroidMovment> movementSlope;
+  int windowWidth;
+  int windowHight;
+  std::vector<astroidMovment> movementSlope;
 };
-
-

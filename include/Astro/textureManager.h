@@ -7,5 +7,5 @@
 #include "game.h"
 class textureManger {
 public:
-    static SDL_Texture *loadTexture(const char *fileName);
+  static SDL_Texture *loadTexture(const char *fileName);
 };

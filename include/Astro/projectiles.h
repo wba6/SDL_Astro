@@ -4,41 +4,41 @@
 
 #pragma once
 
-#include <vector>
 #include <SDL2/SDL_rect.h>
+#include <vector>
 
-
-//TODO: implement collision
+// TODO: implement collision
 struct positionManager {
-    int x, y;
+  int x, y;
 };
 
 class projectile {
 public:
-    projectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY);
+  projectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX,
+             const int &mousePosY);
 
-    ~projectile();
+  ~projectile();
 
-    void update();
+  void update();
 
-    void render();
+  void render();
 
-    SDL_Rect *getDestRect();
+  SDL_Rect *getDestRect();
 
 private:
-
-    double rectAngle;
-    positionManager velocity;
-    int xpos;
-    int ypos;
-    SDL_Rect srcRect, destRect;
+  double rectAngle;
+  positionManager velocity;
+  int xpos;
+  int ypos;
+  SDL_Rect srcRect, destRect;
 };
 
 class projectileManager {
 public:
-    void newProjectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX, const int &mousePosY);
+  void newProjectile(const SDL_Rect &playerPos, double &angle,
+                     const int &mousePosX, const int &mousePosY);
 
-    static std::vector<projectile *> projectiles;
+  static std::vector<projectile *> projectiles;
 
-    std::vector<projectile *> *getProjectiles();
+  std::vector<projectile *> *getProjectiles();
 };

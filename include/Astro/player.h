@@ -4,32 +4,32 @@
 
 #pragma once
 
-#include <SDL2/SDL_image.h>
+#include "projectiles.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <valarray>
 #include <vector>
-#include "projectiles.h"
 class player {
 public:
-    player(int x, int y);
+  player(int x, int y);
 
-    ~player();
+  ~player();
 
-    void update();
+  void update();
 
-    void render();
+  void render();
 
-    SDL_Rect *getDestRect();
+  SDL_Rect *getDestRect();
 
-    std::vector<projectile *> *getproMan();
+  std::vector<projectile *> *getproMan();
+
 private:
-    SDL_Point spriteCenter;
-    double spriteAngle;
-    int xVelocity;
-    int yVelocity;
-    int xpos;
-    int ypos;
-    SDL_Rect srcRect, destRect;
-    SDL_Texture *playertex;
-
+  SDL_Point spriteCenter;
+  double spriteAngle;
+  int xVelocity;
+  int yVelocity;
+  int xpos;
+  int ypos;
+  SDL_Rect srcRect, destRect;
+  SDL_Texture *playertex;
 };
