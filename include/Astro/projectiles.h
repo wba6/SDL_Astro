@@ -7,7 +7,7 @@
 #include <SDL2/SDL_rect.h>
 #include <vector>
 
-
+//TODO: delete projectiles when they go out of bounds
 struct positionManager {
   int x, y;
 };
