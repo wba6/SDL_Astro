@@ -4,21 +4,24 @@
 
 #include "Astro/Check_collision.h"
 
-void collision::checkCollision(std::vector<astroidMovment> *movementSlope,
+bool collision::checkCollision(std::vector<astroidMovment> *movementSlope,
                                player *pla) {
 
     /*
      * checks for collision between player and astroids
      * */
+    bool returnValue  {false};
     for (size_t i{0}; i < movementSlope->size(); i++) {
 
         SDL_bool collision = SDL_HasIntersection(
                 movementSlope->at(i).instance->getDestRect(), pla->getDestRect());
         if (collision == true) {
+            returnValue = true;
             movementSlope->erase(movementSlope->begin() + i);
             i--;
         }
     }
+    return returnValue;
 }
 
 void collision::checkCollision(std::vector<astroidMovment> *movementSlope,

@@ -8,7 +8,7 @@
 #include "projectiles.h"
 class collision {
 public:
-  static void checkCollision(std::vector<astroidMovment> *movementSlope,
+  static bool checkCollision(std::vector<astroidMovment> *movementSlope,
                              player *pla);
 
   static void checkCollision(std::vector<astroidMovment> *movementSlope,

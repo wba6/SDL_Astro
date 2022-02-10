@@ -35,6 +35,10 @@ public:
 
     void addProjectile(projectile *p);
 
+    void loseCondition(bool winLoss);
+
+    void restart();
+
     SDL_Window *getWindow() const;
 
     SDL_Renderer *renderer;
@@ -42,6 +46,9 @@ public:
     textureManger textures;
 
 private:
+    astroidManager *astMan;
+    player *playerOne;
+    bool lost;
     bool isRunning;
     SDL_Window *window;
 

@@ -6,7 +6,7 @@
 
 astroidManager *astMan;
 player *playerOne;
-Game::Game() : textures(this), Manageprojectiles(this) {}
+Game::Game() : textures(this), Manageprojectiles(this),lost(false) {}
 
 Game::~Game() { delete playerOne; }
 
@@ -53,13 +53,19 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-  playerOne->update();
-  astMan->createAstroid();
-  astMan->update();
-  Manageprojectiles.update();
-  collision::checkCollision(astMan->getMovementSlope(), playerOne);
-  collision::checkCollision(astMan->getMovementSlope(),
-                            Manageprojectiles.getProjectiles());
+    if(!lost){
+      playerOne->update();
+      astMan->createAstroid();
+      astMan->update();
+      Manageprojectiles.update();
+      if(collision::checkCollision(astMan->getMovementSlope(), playerOne)){
+          loseCondition(true);
+      }
+      collision::checkCollision(astMan->getMovementSlope(),
+                                Manageprojectiles.getProjectiles());
+    } else{
+        restart();
+    }
 }
 
 void Game::addProjectile(projectile *p) {
@@ -88,5 +94,19 @@ bool Game::running() { return isRunning; }
 
 SDL_Window *Game::getWindow() const {
     return window;
+}
+
+void Game::loseCondition(bool winLoss) {
+    lost = winLoss;
+}
+
+void Game::restart() {
+    int numKeys;
+    const Uint8 *keys = SDL_GetKeyboardState(&numKeys);
+    if (keys[SDL_SCANCODE_R]) {
+        astMan->getMovementSlope()->clear();
+        Manageprojectiles.projectiles.clear();
+        loseCondition(false);
+    }
 }
 
