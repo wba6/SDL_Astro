@@ -3,9 +3,11 @@ project(SDL_Astro)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(${PROJECT_SOURCE_DIR}/include)
-link_directories(${PROJECT_SOURCE_DIR}/lib/x64)
 
+include_directories(${PROJECT_SOURCE_DIR}/include)
+if (WIN32)
+    link_directories(${PROJECT_SOURCE_DIR}/lib/x64)
+endif ()
 add_executable(
   SDL_Astro
   game-manager/main.cpp
