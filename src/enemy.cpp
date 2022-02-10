@@ -2,19 +2,19 @@
 // Created by William Aey on 1/31/2022.
 //
 
-#include <Astro/enemy.h>
-#include <Astro/game.h>
-#include <Astro/textureManager.h>
+#include "Astro/enemy.h"
+#include "Astro/game.h"
+#include "Astro/textureManager.h"
 #include <iostream>
 
 astroidManager::astroidManager(Game *game, SDL_Window *window) : game(game) {
-  SDL_GetWindowSize(window, &windowWidth, &windowHight);
+    SDL_GetWindowSize(window, &windowWidth, &windowHight);
 }
 
 astroidManager::~astroidManager() {}
 
 void astroidManager::createAstroid() {
-  static int frameCounter = 50;
+    static int frameCounter = 50;
   if (frameCounter >= 50) {
 
     double randomXSpawn = (rand() % 900);

@@ -2,18 +2,18 @@
 // Created by William Aey on 2/3/2022.
 //
 
-#include <Astro/game.h>
-#include <Astro/projectiles.h>
+#include "Astro/game.h"
+#include "Astro/projectiles.h"
 
 projectile::projectile(Game *game, const SDL_Rect &playerPos, double &angle,
                        const int &mousePosX, const int &mousePosY)
-    : game(game) {
-  srcRect.x = 0;
-  srcRect.y = 0;
-  srcRect.w = 64;
-  srcRect.h = 64;
-  destRect.w = 8;
-  destRect.h = 16;
+        : game(game) {
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = 64;
+    srcRect.h = 64;
+    destRect.w = 8;
+    destRect.h = 16;
   destRect.x = destRect.y = 64;
 
   destRect.y = playerPos.y;

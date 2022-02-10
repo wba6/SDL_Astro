@@ -1,4 +1,4 @@
-#include <Astro/game.h>
+#include "Astro/game.h"
 #include <ctime>
 
 int main(int argc, char *argv[]) {

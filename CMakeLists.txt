@@ -9,14 +9,14 @@ if (WIN32)
     link_directories(${PROJECT_SOURCE_DIR}/lib/x64)
 endif ()
 add_executable(
-  SDL_Astro
-  game-manager/main.cpp
-  game-manager/game.cpp
-  game-manager/textureManager.cpp
-  player/player.cpp
-  enemy/enemy.cpp
-  projectiles/projectiles.cpp
-  game-manager/Check_collision.cpp
+        SDL_Astro
+        src/main.cpp
+        src/game.cpp
+        src/textureManager.cpp
+        src/player.cpp
+        src/enemy.cpp
+        src/projectiles.cpp
+        src/Check_collision.cpp
 )
 
 target_link_libraries(

@@ -2,19 +2,19 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
-#include <Astro/game.h>
-#include <Astro/player.h>
-#include <Astro/textureManager.h>
+#include "Astro/game.h"
+#include "Astro/player.h"
+#include "Astro/textureManager.h"
 
 player::player(Game *game, int x, int y) : game(game) {
-  xpos = x;
-  ypos = y;
-  playertex = game->textures.loadTexture("assets/player.png");
-  srcRect.x = 0;
-  srcRect.y = 0;
-  srcRect.w = 64;
-  srcRect.h = 64;
-  destRect.w = 64;
+    xpos = x;
+    ypos = y;
+    playertex = game->textures.loadTexture("assets/player.png");
+    srcRect.x = 0;
+    srcRect.y = 0;
+    srcRect.w = 64;
+    srcRect.h = 64;
+    destRect.w = 64;
   destRect.h = 64;
   spriteCenter = {28, 0};
 }
