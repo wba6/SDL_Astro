@@ -21,7 +21,7 @@ void collision::checkCollision(std::vector<astroidMovment> *movementSlope,
 void collision::checkCollision(std::vector<astroidMovment> *movementSlope,
                                std::vector<projectile *> *projectiles) {
   for (size_t i{0}; i < movementSlope->size(); i++) {
-    for (size_t j{0}; j < projectiles->size(); i++) {
+    for (size_t j{0}; j < projectiles->size(); j++) {
       SDL_bool collision =
           SDL_HasIntersection(movementSlope->at(i).instance->getDestRect(),
                               projectiles->at(j)->getDestRect());

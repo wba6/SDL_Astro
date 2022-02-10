@@ -2,15 +2,14 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
+#include <Astro/game.h>
 #include <Astro/player.h>
 #include <Astro/textureManager.h>
 
-projectileManager *proMan;
-
-player::player(int x, int y) {
+player::player(Game *game, int x, int y) : game(game) {
   xpos = x;
   ypos = y;
-  playertex = textureManger::loadTexture("assets/player.png");
+  playertex = game->textures.loadTexture("assets/player.png");
   srcRect.x = 0;
   srcRect.y = 0;
   srcRect.w = 64;
@@ -18,7 +17,6 @@ player::player(int x, int y) {
   destRect.w = 64;
   destRect.h = 64;
   spriteCenter = {28, 0};
-  proMan = new projectileManager();
 }
 
 player::~player() {}
@@ -37,20 +35,17 @@ void player::update() {
   // TODO: Only shoot when player clicks left mouse button
   static int spawnRate{120};
   if (spawnRate >= 120) {
-    projectile *shoot = new projectile(destRect, spriteAngle, mouseX, mouseY);
-    proMan->projectiles.push_back(shoot);
+    projectile *shoot = new projectile(game, destRect, spriteAngle, mouseX, mouseY);
+    game->addProjectile(shoot);
     spawnRate = 0;
   } else {
     spawnRate++;
   }
-  for (auto inst : proMan->projectiles) {
-    inst->update();
-  }
   /*
    * checks for keyboard input and applies directional movement
    * */
-  if (Game::event.type == SDL_KEYDOWN) {
-    switch (Game::event.key.keysym.sym) {
+  if (game->event.type == SDL_KEYDOWN) {
+    switch (game->event.key.keysym.sym) {
     case SDLK_w:
       yVelocity = -1;
       break;
@@ -66,8 +61,8 @@ void player::update() {
     }
   }
 
-  if (Game::event.type == SDL_KEYUP) {
-    switch (Game::event.key.keysym.sym) {
+  if (game->event.type == SDL_KEYUP) {
+    switch (game->event.key.keysym.sym) {
     case SDLK_w:
       yVelocity = 0;
       break;
@@ -100,20 +95,11 @@ void player::update() {
 }
 
 void player::render() {
-  SDL_RenderCopyEx(Game::renderer, playertex, &srcRect, &destRect, spriteAngle,
+  SDL_RenderCopyEx(game->renderer, playertex, &srcRect, &destRect, spriteAngle,
                    &spriteCenter, SDL_FLIP_NONE);
-  // renders all projectiles
-  for (auto instRender : proMan->projectiles) {
-    instRender->render();
-  }
 }
 
 SDL_Rect *player::getDestRect() {
   SDL_Rect *temp = &destRect;
   return temp;
-}
-
-std::vector<projectile *> *player::getproMan() {
-  // returns a pointer to the vector
-  return proMan->getProjectiles();
 }

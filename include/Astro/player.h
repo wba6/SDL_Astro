@@ -9,9 +9,14 @@
 #include <SDL2/SDL_image.h>
 #include <valarray>
 #include <vector>
+
+class Game;
+
 class player {
+  Game *game;
+
 public:
-  player(int x, int y);
+  player(Game *game, int x, int y);
 
   ~player();
 
@@ -20,8 +25,6 @@ public:
   void render();
 
   SDL_Rect *getDestRect();
-
-  std::vector<projectile *> *getproMan();
 
 private:
   SDL_Point spriteCenter;

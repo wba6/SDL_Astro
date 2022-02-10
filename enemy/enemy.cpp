@@ -3,10 +3,11 @@
 //
 
 #include <Astro/enemy.h>
+#include <Astro/game.h>
 #include <Astro/textureManager.h>
 #include <iostream>
 
-astroidManager::astroidManager(SDL_Window *window) {
+astroidManager::astroidManager(Game *game, SDL_Window *window) : game(game) {
   SDL_GetWindowSize(window, &windowWidth, &windowHight);
 }
 
@@ -35,7 +36,7 @@ void astroidManager::createAstroid() {
     double slopeY = windowHight / 2.f - randomYSpawn / 2.f;
     double slopeX = windowWidth / 2.f - randomXSpawn / 2.f;
     double slope = slopeY / slopeX;
-    auto *ast = new astroids(randomXSpawn, randomYSpawn);
+    auto *ast = new astroids(game, randomXSpawn, randomYSpawn);
     movementSlope.push_back({ast, slope});
     std::cout << "astroid created" << std::endl;
     frameCounter = 0;
@@ -61,8 +62,8 @@ std::vector<astroidMovment> *astroidManager::getMovementSlope() {
   return movementTemp;
 }
 
-astroids::astroids(int x, int y) {
-  astroidTex = textureManger::loadTexture("assets/astroid.png");
+astroids::astroids(Game *game, int x, int y) : game(game) {
+  astroidTex = game->textures.loadTexture("assets/astroid.png");
   srcRect.x = 0;
   srcRect.y = 0;
   srcRect.w = destRect.w = 64;
@@ -83,7 +84,7 @@ void astroids::update(const double &slope) {
 void astroids::render() {
   // std::cout << " ||| dest x spawn: " << destRect.x << " dest y spawn: " <<
   // destRect.y << std::endl;
-  SDL_RenderCopy(Game::renderer, astroidTex, &srcRect, &destRect);
+  SDL_RenderCopy(game->renderer, astroidTex, &srcRect, &destRect);
 }
 
 SDL_Rect *astroids::getDestRect() {

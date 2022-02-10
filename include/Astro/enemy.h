@@ -8,9 +8,14 @@
 #include <SDL2/SDL_video.h>
 #include <valarray>
 #include <vector>
+
+class Game;
+
 class astroids {
+  Game *game;
+
 public:
-  astroids(int x, int y);
+  astroids(Game *game, int x, int y);
 
   virtual ~astroids();
 
@@ -31,8 +36,10 @@ struct astroidMovment {
 };
 
 class astroidManager {
+  Game *game;
+
 public:
-  astroidManager(SDL_Window *window);
+  astroidManager(Game *game, SDL_Window *window);
 
   ~astroidManager();
 

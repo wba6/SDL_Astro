@@ -5,10 +5,9 @@
 #include <Astro/game.h>
 #include <Astro/projectiles.h>
 
-std::vector<projectile *> projectileManager::projectiles;
-
-projectile::projectile(const SDL_Rect &playerPos, double &angle,
-                       const int &mousePosX, const int &mousePosY) {
+projectile::projectile(Game *game, const SDL_Rect &playerPos, double &angle,
+                       const int &mousePosX, const int &mousePosY)
+    : game(game) {
   srcRect.x = 0;
   srcRect.y = 0;
   srcRect.w = 64;
@@ -33,18 +32,20 @@ void projectile::update() {
 }
 
 void projectile::render() {
-  SDL_SetRenderDrawColor(Game::renderer, 255, 255, 0, 255);
-  SDL_RenderFillRect(Game::renderer, &destRect);
-  SDL_SetRenderDrawColor(Game::renderer, 200, 0, 0, 255);
+  SDL_SetRenderDrawColor(game->renderer, 255, 255, 0, 255);
+  SDL_RenderFillRect(game->renderer, &destRect);
+  SDL_SetRenderDrawColor(game->renderer, 200, 0, 0, 255);
 }
 
 SDL_Rect *projectile::getDestRect() { return &destRect; }
+
+projectileManager::projectileManager(Game *game) : game(game) {}
 
 void projectileManager::newProjectile(const SDL_Rect &playerPos, double &angle,
                                       const int &mousePosX,
                                       const int &mousePosY) {
   projectile *newProject =
-      new projectile(playerPos, angle, mousePosX, mousePosY);
+      new projectile(game, playerPos, angle, mousePosX, mousePosY);
   projectiles.push_back(newProject);
 }
 

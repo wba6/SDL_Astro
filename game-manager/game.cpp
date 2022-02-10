@@ -3,11 +3,10 @@
 //
 
 #include <Astro/game.h>
+
 astroidManager *astMan;
 player *playerOne;
-SDL_Renderer *Game::renderer = nullptr;
-SDL_Event Game::event;
-Game::Game() {}
+Game::Game() : textures(this), projectiles(this) {}
 
 Game::~Game() { delete playerOne; }
 
@@ -38,8 +37,8 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
   } else {
     isRunning = false;
   }
-  playerOne = new player(50, 50);
-  astMan = new astroidManager(window);
+  playerOne = new player(this, 50, 50);
+  astMan = new astroidManager(this, window);
   astMan->createAstroid();
 }
 
@@ -58,7 +57,12 @@ void Game::update() {
   astMan->createAstroid();
   astMan->update();
   collision::checkCollision(astMan->getMovementSlope(), playerOne);
-  collision::checkCollision(astMan->getMovementSlope(), playerOne->getproMan());
+  collision::checkCollision(astMan->getMovementSlope(),
+                            projectiles.getProjectiles());
+}
+
+void Game::addProjectile(projectile *p) {
+  projectiles.projectiles.push_back(p);
 }
 
 void Game::render() {

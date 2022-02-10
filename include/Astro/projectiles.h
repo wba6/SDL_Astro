@@ -12,10 +12,14 @@ struct positionManager {
   int x, y;
 };
 
+class Game;
+
 class projectile {
+  Game *game;
+
 public:
-  projectile(const SDL_Rect &playerPos, double &angle, const int &mousePosX,
-             const int &mousePosY);
+  projectile(Game *game, const SDL_Rect &playerPos, double &angle,
+             const int &mousePosX, const int &mousePosY);
 
   ~projectile();
 
@@ -34,11 +38,15 @@ private:
 };
 
 class projectileManager {
+  Game *game;
+
 public:
+  explicit projectileManager(Game *game);
+
+  std::vector<projectile *> projectiles;
+
   void newProjectile(const SDL_Rect &playerPos, double &angle,
                      const int &mousePosX, const int &mousePosY);
-
-  static std::vector<projectile *> projectiles;
 
   std::vector<projectile *> *getProjectiles();
 };

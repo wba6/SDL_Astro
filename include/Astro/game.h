@@ -10,6 +10,7 @@
 #include "enemy.h"
 #include "player.h"
 #include "projectiles.h"
+#include "textureManager.h"
 #include <iostream>
 #include <vector>
 
@@ -32,10 +33,15 @@ public:
 
   bool running();
 
-  static SDL_Renderer *renderer;
-  static SDL_Event event;
+  void addProjectile(projectile *p);
+
+  SDL_Renderer *renderer;
+  SDL_Event event;
+  textureManger textures;
 
 private:
   bool isRunning;
   SDL_Window *window;
+
+  projectileManager projectiles;
 };

@@ -3,9 +3,14 @@
 //
 
 #pragma once
-#define SDL_ASTRO_TEXTUREMANAGER_H
-#include "game.h"
+
+#include <SDL2/SDL_render.h>
+class Game;
+
 class textureManger {
+  Game *game;
+
 public:
-  static SDL_Texture *loadTexture(const char *fileName);
+  explicit textureManger(Game *game);
+  SDL_Texture *loadTexture(const char *fileName);
 };
