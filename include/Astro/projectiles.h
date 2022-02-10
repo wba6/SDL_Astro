@@ -7,7 +7,7 @@
 #include <SDL2/SDL_rect.h>
 #include <vector>
 
-// TODO: implement collision
+
 struct positionManager {
   int x, y;
 };

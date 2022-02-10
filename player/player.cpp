@@ -65,15 +65,23 @@ void player::update() {
     }
 
   if (yVelocity == 1) {
-    ypos++;
+      ypos++;
+      ypos++;
+      ypos++;
   } else if (yVelocity == -1) {
-    ypos--;
+      ypos--;
+      ypos--;
+      ypos--;
   }
 
   if (xVelocity == 1) {
-    xpos++;
+      xpos++;
+      xpos++;
+      xpos++;
   } else if (xVelocity == -1) {
-    xpos--;
+      xpos--;
+      xpos--;
+      xpos--;
   }
   // sets active position
   destRect.x = xpos;

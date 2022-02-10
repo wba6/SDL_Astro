@@ -25,23 +25,25 @@ public:
 
   void handleEvents();
 
-  void update();
+    void update();
 
-  void render();
+    void render();
 
-  void clean();
+    void clean();
 
-  bool running();
+    bool running();
 
-  void addProjectile(projectile *p);
+    void addProjectile(projectile *p);
 
-  SDL_Renderer *renderer;
-  SDL_Event event;
-  textureManger textures;
+    SDL_Window *getWindow() const;
+
+    SDL_Renderer *renderer;
+    SDL_Event event;
+    textureManger textures;
 
 private:
-  bool isRunning;
-  SDL_Window *window;
+    bool isRunning;
+    SDL_Window *window;
 
-  projectileManager Manageprojectiles;
+    projectileManager Manageprojectiles;
 };

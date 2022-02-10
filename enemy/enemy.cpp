@@ -45,9 +45,21 @@ void astroidManager::createAstroid() {
 }
 
 void astroidManager::update() {
-  for (auto as : movementSlope) {
-    as.instance->update(as.slope);
-  }
+    for (auto as: movementSlope) {
+        as.instance->update(as.slope);
+    }
+    int x, y{0};
+    SDL_GetWindowSize(game->getWindow(), &x, &y);
+    for (int i = 0; i < movementSlope.size(); ++i) {
+        SDL_Rect *location = movementSlope.at(i).instance->getDestRect();
+        if (location->x > x + 2000 || location->x < x - 2000) {
+            movementSlope.erase(movementSlope.begin() + i);
+            i--;
+        } else if (location->y > y + 2000 || location->y < y - 2000) {
+            movementSlope.erase(movementSlope.begin() + i);
+            i--;
+        }
+    }
 }
 
 void astroidManager::render() {
@@ -78,6 +90,7 @@ void astroids::update(const double &slope) {
   destRect.x += 4.f;
   double movementAmountY = nextY - destRect.y;
   destRect.y += movementAmountY;
+
 }
 
 void astroids::render() {

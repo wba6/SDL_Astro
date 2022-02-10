@@ -75,13 +75,18 @@ void Game::render() {
   astMan->render();
   playerOne->render();
   // render new stuff
-  SDL_RenderPresent(renderer);
+    SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
-  SDL_DestroyWindow(window);
-  SDL_DestroyRenderer(renderer);
-  std::cout << "game cleaned" << std::endl;
+    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
+    std::cout << "game cleaned" << std::endl;
 }
 
 bool Game::running() { return isRunning; }
+
+SDL_Window *Game::getWindow() const {
+    return window;
+}
+
