@@ -11,6 +11,11 @@
 
 class Game;
 
+enum direction{
+    forward,
+    backwords
+};
+
 class astroids {
   Game *game;
 
@@ -19,7 +24,7 @@ public:
 
   virtual ~astroids();
 
-  void update(const double &slope);
+  void update(const double &slope,const direction &direct);
 
   void render();
 
@@ -33,6 +38,7 @@ private:
 struct astroidMovment {
   astroids *instance;
   double slope;
+  direction direct;
 };
 
 class astroidManager {

@@ -17,11 +17,12 @@ void astroidManager::createAstroid() {
     static int frameCounter = 50;
   if (frameCounter >= 50) {
 
-    double randomXSpawn = (rand() % 900);
+    double randomXSpawn = (rand() % 1200);
     double randomYSpawn = 0;
     // get random cord and give it a random chance of being negative
-    randomXSpawn = (rand() % 10) < 5 ? randomXSpawn * -1 : randomXSpawn;
+    randomXSpawn = (rand() % 10) <= 5 ? randomXSpawn * -1 : randomXSpawn;
     //uses equation of a circle to find spawn locations
+     // y = k + sqrt(r^2 - (x-u)^2)
     if (randomXSpawn > 0) {
       randomYSpawn = (windowWidth / 2.f) +
                      std::sqrt(pow(windowHight, 2) -
@@ -31,13 +32,27 @@ void astroidManager::createAstroid() {
       randomYSpawn = (windowWidth / 2.f) -
                      std::sqrt(pow(windowHight, 2) -
                                pow(((randomXSpawn * -1.f) - (windowHight)), 2));
+      //y = (800/2) - sqrt((600^2) - (1293 *-1) - 600)^2) will cause an error because of imaginary num
       randomYSpawn *= -1.f;
     }
-    double slopeY = windowHight / 2.f - randomYSpawn / 2.f;
-    double slopeX = windowWidth / 2.f - randomXSpawn / 2.f;
+    //gives random chance of flipping asteroid
+    if(((rand() % 10)) <= 5 && randomXSpawn < -100 ){
+        randomXSpawn *= -1.f;
+        randomYSpawn *= -1.f;
+    }
+
+    double slopeY = (windowHight / 2.f) - (randomYSpawn );
+    double slopeX = (windowWidth / 2.f) - (randomXSpawn );
     double slope = slopeY / slopeX;
+
+
     auto *ast = new astroids(game, randomXSpawn, randomYSpawn);
-    movementSlope.push_back({ast, slope});
+
+    if(randomXSpawn > windowWidth){
+        movementSlope.push_back({ast, slope,backwords});
+    }else{
+        movementSlope.push_back({ast, slope,forward});
+    }
     frameCounter = 0;
   } else {
     frameCounter++;
@@ -46,19 +61,19 @@ void astroidManager::createAstroid() {
 
 void astroidManager::update() {
     for (auto as: movementSlope) {
-        as.instance->update(as.slope);
+        as.instance->update(as.slope,as.direct);
     }
     /*
-   * deletes out of range astroids
+   * deletes out of range astroids and astroids with to greate of slope
    * */
     int x, y{0};
     SDL_GetWindowSize(game->getWindow(), &x, &y);
     for (int i = 0; i < movementSlope.size(); ++i) {
         SDL_Rect *location = movementSlope.at(i).instance->getDestRect();
-        if (location->x > x + 2000 || location->x < x - 2000) {
+        if (location->x > x + 2000 || location->x < x - 2000 || movementSlope.at(i).slope > 5) {
             movementSlope.erase(movementSlope.begin() + i);
             i--;
-        } else if (location->y > y + 2000 || location->y < y - 2000) {
+        } else if (location->y > y + 2000 || location->y < y - 2000 || movementSlope.at(i).slope < -5) {
             movementSlope.erase(movementSlope.begin() + i);
             i--;
         }
@@ -88,15 +103,35 @@ astroids::astroids(Game *game, int x, int y) : game(game) {
 
 astroids::~astroids() {}
 
-void astroids::update(const double &slope) {
-  double nextY = -1 * (slope * ((destRect.x - 4.f) - destRect.x)) + destRect.y;
-  destRect.x += 4.f;
+void astroids::update(const double &slope, const direction &direct) {
+    double nextY {0};
+    //find next point on line, point slope form
+    if(direct == forward){
+        if(slope>2 || slope < -2){
+            nextY = -1 * (slope * ((destRect.x - 0.5f) - destRect.x)) + destRect.y;
+            destRect.x += 0.5f;
+        }else{
+        nextY = -1 * (slope * ((destRect.x - 2.f) - destRect.x)) + destRect.y;
+        destRect.x += 2.f;
+        }
+    } else if(direct == backwords){
+        if(slope>2 || slope < -2){
+            nextY = -1 * (slope * ((destRect.x + 0.5f) - destRect.x)) + destRect.y;
+            destRect.x -= 0.5f;
+        }else{
+            nextY = -1 * (slope * ((destRect.x + 2.f) - destRect.x)) + destRect.y;
+            destRect.x -= 2.f;
+        }
+
+    }else{
+        throw "Astroid movement error";
+    }
   double movementAmountY = nextY - destRect.y;
   destRect.y += movementAmountY;
-
 }
 
 void astroids::render() {
+
   SDL_RenderCopy(game->renderer, astroidTex, &srcRect, &destRect);
 }
 

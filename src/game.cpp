@@ -67,7 +67,6 @@ void Game::update() {
 }
 
 void Game::addProjectile(projectile *p) {
-    std::cout<<"add projectile"<<std::endl;
   Manageprojectiles.projectiles.push_back(p);
 }
 
