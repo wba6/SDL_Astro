@@ -9,45 +9,48 @@
 
 //TODO: delete projectiles when they go out of bounds
 struct positionManager {
-  int x, y;
+    int x, y;
 };
 
 class Game;
 
 class projectile {
-  Game *game;
+    Game *game;
 
 public:
-  projectile(Game *game, const SDL_Rect &playerPos, double &angle,
-             const int &mousePosX, const int &mousePosY);
+    projectile(Game *game, const SDL_Rect &playerPos, double &angle,
+               const int &mousePosX, const int &mousePosY);
 
-  ~projectile();
+    ~projectile();
 
-  void update();
+    void update();
 
-  void render();
+    void render();
 
-  SDL_Rect *getDestRect();
+    SDL_Rect *getDestRect();
 
 private:
-  double rectAngle;
-  positionManager velocity;
-  int xpos;
-  int ypos;
-  SDL_Rect srcRect, destRect;
+    double rectAngle;
+    positionManager velocity;
+    int xpos;
+    int ypos;
+    SDL_Rect srcRect, destRect;
 };
 
 class projectileManager {
-  Game *game;
+    Game *game;
 
 public:
-  explicit projectileManager(Game *game);
+    explicit projectileManager(Game *game);
 
-  std::vector<projectile *> projectiles;
+    std::vector<projectile *> projectiles;
 
-  void newProjectile(const SDL_Rect &playerPos, double &angle,
-                     const int &mousePosX, const int &mousePosY);
-  void RenderProjectiles();
-  void update();
-  std::vector<projectile *> *getProjectiles();
+    void newProjectile(const SDL_Rect &playerPos, double &angle,
+                       const int &mousePosX, const int &mousePosY);
+
+    void RenderProjectiles();
+
+    void update();
+
+    std::vector<projectile *> *getProjectiles();
 };

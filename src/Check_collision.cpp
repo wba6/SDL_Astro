@@ -10,7 +10,7 @@ bool collision::checkCollision(std::vector<astroidMovment> *movementSlope,
     /*
      * checks for collision between player and astroids
      * */
-    bool returnValue  {false};
+    bool returnValue{false};
     for (size_t i{0}; i < movementSlope->size(); i++) {
 
         SDL_bool collision = SDL_HasIntersection(
@@ -40,8 +40,8 @@ void collision::checkCollision(std::vector<astroidMovment> *movementSlope,
                 projectiles->erase(projectiles->begin() + j);
                 i--;
             }
+        }
     }
-  }
 
 }
 

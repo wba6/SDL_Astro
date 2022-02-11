@@ -3,14 +3,16 @@
 //
 
 #pragma once
+
 #include "enemy.h"
 #include "player.h"
 #include "projectiles.h"
+
 class collision {
 public:
-  static bool checkCollision(std::vector<astroidMovment> *movementSlope,
-                             player *pla);
+    static bool checkCollision(std::vector<astroidMovment> *movementSlope,
+                               player *pla);
 
-  static void checkCollision(std::vector<astroidMovment> *movementSlope,
-                             std::vector<projectile *> *projectiles);
+    static void checkCollision(std::vector<astroidMovment> *movementSlope,
+                               std::vector<projectile *> *projectiles);
 };

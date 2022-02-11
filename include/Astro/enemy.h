@@ -11,54 +11,54 @@
 
 class Game;
 
-enum direction{
+enum direction {
     forward,
     backwords
 };
 
 class astroids {
-  Game *game;
+    Game *game;
 
 public:
-  astroids(Game *game, int x, int y);
+    astroids(Game *game, int x, int y);
 
-  virtual ~astroids();
+    virtual ~astroids();
 
-  void update(const double &slope,const direction &direct);
+    void update(const double &slope, const direction &direct);
 
-  void render();
+    void render();
 
-  SDL_Rect *getDestRect();
+    SDL_Rect *getDestRect();
 
 private:
-  SDL_Rect srcRect, destRect;
-  SDL_Texture *astroidTex;
+    SDL_Rect srcRect, destRect;
+    SDL_Texture *astroidTex;
 };
 
 struct astroidMovment {
-  astroids *instance;
-  double slope;
-  direction direct;
+    astroids *instance;
+    double slope;
+    direction direct;
 };
 
 class astroidManager {
-  Game *game;
+    Game *game;
 
 public:
-  astroidManager(Game *game, SDL_Window *window);
+    astroidManager(Game *game, SDL_Window *window);
 
-  ~astroidManager();
+    ~astroidManager();
 
-  void createAstroid();
+    void createAstroid();
 
-  void update();
+    void update();
 
-  void render();
+    void render();
 
-  std::vector<astroidMovment> *getMovementSlope();
+    std::vector<astroidMovment> *getMovementSlope();
 
 private:
-  int windowWidth;
-  int windowHight;
-  std::vector<astroidMovment> movementSlope;
+    int windowWidth;
+    int windowHight;
+    std::vector<astroidMovment> movementSlope;
 };

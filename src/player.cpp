@@ -15,8 +15,8 @@ player::player(Game *game, int x, int y) : game(game) {
     srcRect.w = 64;
     srcRect.h = 64;
     destRect.w = 64;
-  destRect.h = 64;
-  spriteCenter = {28, 0};
+    destRect.h = 64;
+    spriteCenter = {28, 0};
 }
 
 player::~player() {}
@@ -65,37 +65,37 @@ void player::update() {
     }
     int w, h{0};
     SDL_GetWindowSize(game->getWindow(), &w, &h);
-  if (yVelocity == 1 && destRect.y < h - 25 ) {
-      ypos++;
-      ypos++;
-      ypos++;
-  } else if (yVelocity == -1 && destRect.y > 25) {
-      ypos--;
-      ypos--;
-      ypos--;
-  }
+    if (yVelocity == 1 && destRect.y < h - 25) {
+        ypos++;
+        ypos++;
+        ypos++;
+    } else if (yVelocity == -1 && destRect.y > 25) {
+        ypos--;
+        ypos--;
+        ypos--;
+    }
 
 
-  if (xVelocity == 1 && destRect.x < w -50) {
-      xpos++;
-      xpos++;
-      xpos++;
-  } else if (xVelocity == -1 && destRect.x >0) {
-      xpos--;
-      xpos--;
-      xpos--;
-  }
-  // sets active position
-  destRect.x = xpos;
-  destRect.y = ypos;
+    if (xVelocity == 1 && destRect.x < w - 50) {
+        xpos++;
+        xpos++;
+        xpos++;
+    } else if (xVelocity == -1 && destRect.x > 0) {
+        xpos--;
+        xpos--;
+        xpos--;
+    }
+    // sets active position
+    destRect.x = xpos;
+    destRect.y = ypos;
 }
 
 void player::render() {
-  SDL_RenderCopyEx(game->renderer, playertex, &srcRect, &destRect, spriteAngle,
-                   &spriteCenter, SDL_FLIP_NONE);
+    SDL_RenderCopyEx(game->renderer, playertex, &srcRect, &destRect, spriteAngle,
+                     &spriteCenter, SDL_FLIP_NONE);
 }
 
 SDL_Rect *player::getDestRect() {
-  SDL_Rect *temp = &destRect;
-  return temp;
+    SDL_Rect *temp = &destRect;
+    return temp;
 }

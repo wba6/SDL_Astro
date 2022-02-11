@@ -14,27 +14,27 @@ projectile::projectile(Game *game, const SDL_Rect &playerPos, double &angle,
     srcRect.h = 64;
     destRect.w = 8;
     destRect.h = 16;
-  destRect.x = destRect.y = 64;
+    destRect.x = destRect.y = 64;
 
-  destRect.y = playerPos.y;
-  destRect.x = playerPos.x;
+    destRect.y = playerPos.y;
+    destRect.x = playerPos.x;
 
-  rectAngle = angle;
-  velocity.y = (mousePosY - playerPos.y) / 20;
-  velocity.x = (mousePosX - playerPos.x) / 20;
+    rectAngle = angle;
+    velocity.y = (mousePosY - playerPos.y) / 20;
+    velocity.x = (mousePosX - playerPos.x) / 20;
 }
 
 projectile::~projectile() {}
 
 void projectile::update() {
-  destRect.x += velocity.x;
-  destRect.y += velocity.y;
+    destRect.x += velocity.x;
+    destRect.y += velocity.y;
 }
 
 void projectile::render() {
-  SDL_SetRenderDrawColor(game->renderer, 255, 255, 0, 255);
-  SDL_RenderFillRect(game->renderer, &destRect);
-  SDL_SetRenderDrawColor(game->renderer, 200, 0, 0, 255);
+    SDL_SetRenderDrawColor(game->renderer, 255, 255, 0, 255);
+    SDL_RenderFillRect(game->renderer, &destRect);
+    SDL_SetRenderDrawColor(game->renderer, 200, 0, 0, 255);
 }
 
 SDL_Rect *projectile::getDestRect() { return &destRect; }
@@ -44,19 +44,19 @@ projectileManager::projectileManager(Game *game) : game(game) {}
 void projectileManager::newProjectile(const SDL_Rect &playerPos, double &angle,
                                       const int &mousePosX,
                                       const int &mousePosY) {
-  projectile *newProject =
-      new projectile(game, playerPos, angle, mousePosX, mousePosY);
-  projectiles.push_back(newProject);
+    projectile *newProject =
+            new projectile(game, playerPos, angle, mousePosX, mousePosY);
+    projectiles.push_back(newProject);
 }
 
 std::vector<projectile *> *projectileManager::getProjectiles() {
-  return &projectiles;
+    return &projectiles;
 }
 
 void projectileManager::RenderProjectiles() {
-  for(auto inst: projectiles){
-    inst->render();
-  }
+    for (auto inst: projectiles) {
+        inst->render();
+    }
 }
 
 void projectileManager::update() {

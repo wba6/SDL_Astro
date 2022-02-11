@@ -13,26 +13,26 @@
 class Game;
 
 class player {
-  Game *game;
+    Game *game;
 
 public:
-  explicit player(Game *game, int x, int y);
+    explicit player(Game *game, int x, int y);
 
-  ~player();
+    ~player();
 
-  void update();
+    void update();
 
-  void render();
+    void render();
 
-  SDL_Rect *getDestRect();
+    SDL_Rect *getDestRect();
 
 private:
-  SDL_Point spriteCenter;
-  double spriteAngle;
-  int xVelocity;
-  int yVelocity;
-  int xpos;
-  int ypos;
-  SDL_Rect srcRect, destRect;
-  SDL_Texture *playertex;
+    SDL_Point spriteCenter;
+    double spriteAngle;
+    int xVelocity;
+    int yVelocity;
+    int xpos;
+    int ypos;
+    SDL_Rect srcRect, destRect;
+    SDL_Texture *playertex;
 };

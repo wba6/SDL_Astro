@@ -16,14 +16,14 @@
 
 class Game {
 public:
-  Game();
+    Game();
 
-  virtual ~Game();
+    virtual ~Game();
 
-  void init(const char *title, int xpos, int ypos, int width, int height,
-            bool fullscreen);
+    void init(const char *title, int xpos, int ypos, int width, int height,
+              bool fullscreen);
 
-  void handleEvents();
+    void handleEvents();
 
     void update();
 
