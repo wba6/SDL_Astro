@@ -13,6 +13,6 @@ public:
     static bool checkCollision(std::vector<astroidMovment> *movementSlope,
                                player *pla);
 
-    static void checkCollision(std::vector<astroidMovment> *movementSlope,
-                               std::vector<projectile *> *projectiles);
+    static int checkCollision(std::vector<astroidMovment> *movementSlope,
+                              std::vector<projectile *> *projectiles);
 };

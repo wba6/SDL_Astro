@@ -59,8 +59,8 @@ void Game::update() {
         if (collision::checkCollision(astMan->getMovementSlope(), playerOne)) {
             loseCondition(true);
         }
-        collision::checkCollision(astMan->getMovementSlope(),
-                                  Manageprojectiles.getProjectiles());
+        score += collision::checkCollision(astMan->getMovementSlope(),
+                                           Manageprojectiles.getProjectiles());
 
     } else {
         restart();
@@ -109,6 +109,7 @@ void Game::restart() {
         astMan->getMovementSlope()->clear();
         Manageprojectiles.projectiles.clear();
         loseCondition(false);
+        score = 0;
     }
 }
 

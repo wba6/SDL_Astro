@@ -7,7 +7,7 @@
 #include "Astro/textureManager.h"
 
 
-double generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth);
+void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth);
 
 astroidManager::astroidManager(Game *game, SDL_Window *window) : game(game) {
     SDL_GetWindowSize(window, &windowWidth, &windowHight);
@@ -123,7 +123,7 @@ SDL_Rect *astroids::getDestRect() {
     return temp;
 }
 
-double generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth) {
+void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth) {
     randomXSpawn = (rand() % 1200);
     // get random cord and give it a random chance of being negative
     randomXSpawn = (rand() % 10) <= 5 ? randomXSpawn * -1 : randomXSpawn;

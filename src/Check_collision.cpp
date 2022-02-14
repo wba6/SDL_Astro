@@ -24,12 +24,13 @@ bool collision::checkCollision(std::vector<astroidMovment> *movementSlope,
     return returnValue;
 }
 
-void collision::checkCollision(std::vector<astroidMovment> *movementSlope,
-                               std::vector<projectile *> *projectiles) {
+int collision::checkCollision(std::vector<astroidMovment> *movementSlope,
+                              std::vector<projectile *> *projectiles) {
 
     /*
      * checks for collision between astroids and projectiles
      * */
+    int numberOfCollisions{0};
     for (size_t i{0}; i < movementSlope->size(); i++) {
         for (size_t j{0}; j < projectiles->size(); j++) {
             SDL_bool collision =
@@ -38,10 +39,11 @@ void collision::checkCollision(std::vector<astroidMovment> *movementSlope,
             if (collision == true) {
                 movementSlope->erase(movementSlope->begin() + i);
                 projectiles->erase(projectiles->begin() + j);
+                numberOfCollisions++;
                 i--;
             }
         }
     }
-
+    return numberOfCollisions;
 }
 

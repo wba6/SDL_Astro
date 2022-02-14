@@ -66,24 +66,18 @@ void player::update() {
     int w, h{0};
     SDL_GetWindowSize(game->getWindow(), &w, &h);
     if (yVelocity == 1 && destRect.y < h - 25) {
-        ypos++;
-        ypos++;
-        ypos++;
+        ypos += 4;
+
     } else if (yVelocity == -1 && destRect.y > 25) {
-        ypos--;
-        ypos--;
-        ypos--;
+        ypos -= 4;
+
     }
 
 
     if (xVelocity == 1 && destRect.x < w - 50) {
-        xpos++;
-        xpos++;
-        xpos++;
+        xpos += 4;
     } else if (xVelocity == -1 && destRect.x > 0) {
-        xpos--;
-        xpos--;
-        xpos--;
+        xpos -= 4;
     }
     // sets active position
     destRect.x = xpos;
