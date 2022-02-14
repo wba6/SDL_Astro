@@ -3,23 +3,32 @@
 //
 
 #pragma once
-#define SDL_ASTRO_ENEMY_H
 
+#include <SDL2/SDL_render.h>
+#include <SDL2/SDL_video.h>
+#include <valarray>
 #include <vector>
-#include "../game-manager/game.h"
+
+class Game;
+
+enum direction {
+    forward,
+    backwords
+};
 
 class astroids {
-public:
+    Game *game;
 
-    astroids(int x, int y);
+public:
+    astroids(Game *game, int x, int y);
 
     virtual ~astroids();
 
-    void update(const double &slope);
+    void update(const double &slope, const direction &direct);
 
     void render();
 
-   SDL_Rect *getDestRect();
+    SDL_Rect *getDestRect();
 
 private:
     SDL_Rect srcRect, destRect;
@@ -29,11 +38,14 @@ private:
 struct astroidMovment {
     astroids *instance;
     double slope;
+    direction direct;
 };
 
 class astroidManager {
+    Game *game;
+
 public:
-    astroidManager(SDL_Window *window);
+    astroidManager(Game *game, SDL_Window *window);
 
     ~astroidManager();
 
@@ -50,5 +62,3 @@ private:
     int windowHight;
     std::vector<astroidMovment> movementSlope;
 };
-
-

@@ -3,16 +3,20 @@
 //
 
 #pragma once
-#define SDL_ASTRO_PLAYER_H
 
-#include "SDL2/SDL_image.h"
-#include "SDL2/SDL.h"
-#include "../game-manager/textureManager.h"
-#include "../game-manager/game.h"
-#include "../projectiles/projectiles.h"
+#include "projectiles.h"
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <valarray>
+#include <vector>
+
+class Game;
+
 class player {
+    Game *game;
+
 public:
-    player(int x, int y);
+    explicit player(Game *game, int x, int y);
 
     ~player();
 
@@ -31,5 +35,4 @@ private:
     int ypos;
     SDL_Rect srcRect, destRect;
     SDL_Texture *playertex;
-
 };
