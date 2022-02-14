@@ -11,8 +11,11 @@
 #include "player.h"
 #include "projectiles.h"
 #include "textureManager.h"
+#include "SDL2/SDL_ttf.h"
+#include "scoreManager.h"
 #include <iostream>
 #include <vector>
+#include <map>
 
 class Game {
 public:
@@ -46,6 +49,8 @@ public:
     textureManger textures;
 
 private:
+    unsigned int score;
+    scoreManager *scoreMan;
     astroidManager *astMan;
     player *playerOne;
     bool lost;

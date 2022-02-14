@@ -4,7 +4,7 @@
 
 #include "Astro/game.h"
 
-Game::Game() : textures(this), Manageprojectiles(this), lost(false) {}
+Game::Game() : textures(this), Manageprojectiles(this), lost(false), score(0) {}
 
 Game::~Game() { delete playerOne; }
 
@@ -17,7 +17,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
     // a window
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
         std::cout << "subsystem running" << std::endl;
-
+        TTF_Init();
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         // check if window was made successfully
         if (window) {
@@ -37,7 +37,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
     }
     playerOne = new player(this, 50, 50);
     astMan = new astroidManager(this, window);
-    astMan->createAstroid();
+    scoreMan = new scoreManager(this);
 }
 
 void Game::handleEvents() {
@@ -56,11 +56,13 @@ void Game::update() {
         astMan->createAstroid();
         astMan->update();
         Manageprojectiles.update();
+        scoreMan->upadateScore();
         if (collision::checkCollision(astMan->getMovementSlope(), playerOne)) {
             loseCondition(true);
         }
         collision::checkCollision(astMan->getMovementSlope(),
                                   Manageprojectiles.getProjectiles());
+
     } else {
         restart();
     }
@@ -77,13 +79,17 @@ void Game::render() {
     Manageprojectiles.RenderProjectiles();
     astMan->render();
     playerOne->render();
+    scoreMan->render();
+    scoreMan->render();
     // render new stuff
     SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
+    TTF_Quit();
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
+    SDL_Quit();
     std::cout << "game cleaned" << std::endl;
 }
 

@@ -17,11 +17,12 @@ add_executable(
         src/enemy.cpp
         src/projectiles.cpp
         src/Check_collision.cpp
-)
+        src/scoreManager.cpp include/Astro/scoreManager.h)
 
 target_link_libraries(
   ${PROJECT_NAME}
   SDL2main
   SDL2
-  SDL2_image
+        SDL2_image
+        SDL2_ttf.dll
 )
