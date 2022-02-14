@@ -15,11 +15,12 @@ public:
 
     ~scoreManager();
 
-    void upadateScore();
+    void upadateScore(const int score);
 
     void render();
 
 private:
+    SDL_Rect destRect;
     Game *Game;
     TTF_Font *font;
     SDL_Surface *surface;

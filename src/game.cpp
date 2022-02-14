@@ -56,7 +56,6 @@ void Game::update() {
         astMan->createAstroid();
         astMan->update();
         Manageprojectiles.update();
-        scoreMan->upadateScore();
         if (collision::checkCollision(astMan->getMovementSlope(), playerOne)) {
             loseCondition(true);
         }
@@ -66,6 +65,7 @@ void Game::update() {
     } else {
         restart();
     }
+        scoreMan->upadateScore(score);
 }
 
 void Game::addProjectile(projectile *p) {
@@ -76,11 +76,10 @@ void Game::render() {
     // clear render buffer
     SDL_RenderClear(renderer);
     // render texture
+    scoreMan->render();
     Manageprojectiles.RenderProjectiles();
     astMan->render();
     playerOne->render();
-    scoreMan->render();
-    scoreMan->render();
     // render new stuff
     SDL_RenderPresent(renderer);
 }
