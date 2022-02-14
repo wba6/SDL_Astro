@@ -32,8 +32,6 @@ public:
 
     void render();
 
-    void clean();
-
     bool running();
 
     void addProjectile(projectile *p);
@@ -45,7 +43,7 @@ public:
     SDL_Window *getWindow() const;
 
     SDL_Renderer *renderer;
-    SDL_Event event;
+    std::vector<SDL_Event> events;
     textureManger textures;
 
 private:

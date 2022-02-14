@@ -1,7 +1,7 @@
 #include "Astro/game.h"
 #include <ctime>
 
-int main(int argc, char *argv[]) {
+int main() {
     // limit the frame rate
     const int fps = 120;
     const int frameDelay = 1000 / fps;
@@ -31,6 +31,6 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    game->clean();
+    delete game;
     return 0;
 }

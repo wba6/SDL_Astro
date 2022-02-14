@@ -46,28 +46,34 @@ void player::update() {
     /*
      * checks for keyboard input and applies directional movement
      * */
-    int numKeys;
-    const Uint8 *keys = SDL_GetKeyboardState(&numKeys);
-    if (keys[SDL_SCANCODE_W]) {
-        yVelocity = -1;
-    } else if (keys[SDL_SCANCODE_S]) {
-        yVelocity = 1;
-    } else {
-        yVelocity = 0;
-    }
+    for (const SDL_Event &event: game->events) {
+        if (event.type == SDL_KEYDOWN) {
+            SDL_Keycode key = event.key.keysym.sym;
+            if (key == SDLK_w) {
+                yVelocity = -1;
+            } else if (key == SDLK_s) {
+                yVelocity = 1;
+            }
 
-    if (keys[SDL_SCANCODE_A]) {
-        xVelocity = -1;
-    } else if (keys[SDL_SCANCODE_D]) {
-        xVelocity = 1;
-    } else {
-        xVelocity = 0;
+            if (key == SDLK_a) {
+                xVelocity = -1;
+            } else if (key == SDLK_d) {
+                xVelocity = 1;
+            }
+        } else if (event.type == SDL_KEYUP) {
+            SDL_Keycode key = event.key.keysym.sym;
+            if (key == SDLK_w || key == SDLK_s) {
+                yVelocity = 0;
+            }
+            if (key == SDLK_a || key == SDLK_s) {
+                xVelocity = 0;
+            }
+        }
     }
     int w, h{0};
     SDL_GetWindowSize(game->getWindow(), &w, &h);
     if (yVelocity == 1 && destRect.y < h - 25) {
         ypos += 4;
-
     } else if (yVelocity == -1 && destRect.y > 25) {
         ypos -= 4;
     }
