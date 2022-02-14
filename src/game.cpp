@@ -16,19 +16,16 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
     // checks to make sure that the system is initialized correctly before making
     // a window
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
-        std::cout << "subsystem running" << std::endl;
         TTF_Init();
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
         // check if window was made successfully
         if (window) {
-            std::cout << "window created" << std::endl;
         }
 
         // create render
         renderer = SDL_CreateRenderer(window, -1, flags);
         if (renderer) {
             SDL_SetRenderDrawColor(renderer, 200, 0, 0, 255);
-            std::cout << "Render created" << std::endl;
         }
 
         isRunning = true;
@@ -89,7 +86,6 @@ void Game::clean() {
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
-    std::cout << "game cleaned" << std::endl;
 }
 
 bool Game::running() { return isRunning; }
