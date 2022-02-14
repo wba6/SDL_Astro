@@ -7,15 +7,15 @@
 #include "Check_collision.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 #include "enemy.h"
 #include "player.h"
 #include "projectiles.h"
-#include "textureManager.h"
-#include "SDL2/SDL_ttf.h"
 #include "scoreManager.h"
+#include "textureManager.h"
 #include <iostream>
-#include <vector>
 #include <map>
+#include <vector>
 
 class Game {
 public:

@@ -65,7 +65,7 @@ void Game::update() {
     } else {
         restart();
     }
-        scoreMan->upadateScore(score);
+    scoreMan->upadateScore(score);
 }
 
 void Game::addProjectile(projectile *p) {
@@ -112,4 +112,3 @@ void Game::restart() {
         score = 0;
     }
 }
-

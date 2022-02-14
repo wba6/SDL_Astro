@@ -46,4 +46,3 @@ int collision::checkCollision(std::vector<astroidMovment> *movementSlope,
     }
     return numberOfCollisions;
 }
-

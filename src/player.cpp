@@ -2,8 +2,8 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
-#include "Astro/game.h"
 #include "Astro/player.h"
+#include "Astro/game.h"
 #include "Astro/textureManager.h"
 
 player::player(Game *game, int x, int y) : game(game) {
@@ -30,7 +30,7 @@ void player::update() {
     spriteAngle = (spriteAngle * 180.f) / 3.141f;
     spriteAngle -= 90;
 
-/*
+    /*
  * spawns new projectiles when left mouse is pressed
  * */
     static int spawnRate{60};
@@ -70,7 +70,6 @@ void player::update() {
 
     } else if (yVelocity == -1 && destRect.y > 25) {
         ypos -= 4;
-
     }
 
 

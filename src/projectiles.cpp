@@ -2,12 +2,12 @@
 // Created by William Aey on 2/3/2022.
 //
 
-#include "Astro/game.h"
 #include "Astro/projectiles.h"
+#include "Astro/game.h"
 
 projectile::projectile(Game *game, const SDL_Rect &playerPos, double &angle,
                        const int &mousePosX, const int &mousePosY)
-        : game(game) {
+    : game(game) {
     srcRect.x = 0;
     srcRect.y = 0;
     srcRect.w = 64;
