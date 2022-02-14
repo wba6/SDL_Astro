@@ -8,6 +8,8 @@ Game::Game() : textures(this), score(0), lost(false), Manageprojectiles(this) {}
 
 Game::~Game() {
     delete playerOne;
+    delete astMan;
+    delete scoreMan;
     TTF_Quit();
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);

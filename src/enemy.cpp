@@ -13,7 +13,11 @@ astroidManager::astroidManager(Game *game, SDL_Window *window) : game(game) {
     SDL_GetWindowSize(window, &windowWidth, &windowHight);
 }
 
-astroidManager::~astroidManager() {}
+astroidManager::~astroidManager() {
+    for (auto& ast : movementSlope) {
+        delete ast.instance;
+    }
+}
 
 void astroidManager::createAstroid() {
     static int frameCounter = 50;
@@ -51,12 +55,14 @@ void astroidManager::update() {
    * */
     int x, y{0};
     SDL_GetWindowSize(game->getWindow(), &x, &y);
-    for (int i = 0; i < movementSlope.size(); ++i) {
+    for (size_t i = 0; i < movementSlope.size(); ++i) {
         SDL_Rect *location = movementSlope.at(i).instance->getDestRect();
         if (location->x > x + 2000 || location->x < x - 2000 || movementSlope.at(i).slope > 5) {
+            delete movementSlope[i].instance;
             movementSlope.erase(movementSlope.begin() + i);
             i--;
         } else if (location->y > y + 2000 || location->y < y - 2000 || movementSlope.at(i).slope < -5) {
+            delete movementSlope[i].instance;
             movementSlope.erase(movementSlope.begin() + i);
             i--;
         }
