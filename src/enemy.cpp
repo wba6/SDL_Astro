@@ -4,16 +4,36 @@
 
 #include "Astro/enemy.h"
 #include "Astro/game.h"
+#include "Astro/randomness.h"
 #include "Astro/textureManager.h"
 
 
 void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth);
 
+
+astroidMovment::astroidMovment(astroidMovment &&other) noexcept : instance(other.instance), slope(other.slope), direct(other.direct) {
+    other.instance = nullptr;
+}
+astroidMovment &astroidMovment::operator=(astroidMovment &&other) noexcept {
+    if (&other != this) {
+        delete instance;
+        instance = other.instance;
+        slope = other.slope;
+        direct = other.direct;
+        other.instance = nullptr;
+    }
+
+    return *this;
+}
+astroidMovment::astroidMovment(astroids *instance, double slope, direction direct) : instance(instance), slope(slope), direct(direct) {
+}
+astroidMovment::~astroidMovment() {
+    delete instance;
+}
+
 astroidManager::astroidManager(Game *game, SDL_Window *window) : game(game) {
     SDL_GetWindowSize(window, &windowWidth, &windowHight);
 }
-
-astroidManager::~astroidManager() {}
 
 void astroidManager::createAstroid() {
     static int frameCounter = 50;
@@ -32,9 +52,9 @@ void astroidManager::createAstroid() {
         auto *ast = new astroids(game, randomXSpawn, randomYSpawn);
 
         if (randomXSpawn > windowWidth) {
-            movementSlope.push_back({ast, slope, backwords});
+            movementSlope.emplace_back(ast, slope, backwords);
         } else {
-            movementSlope.push_back({ast, slope, forward});
+            movementSlope.emplace_back(ast, slope, forward);
         }
         frameCounter = 0;
     } else {
@@ -43,15 +63,15 @@ void astroidManager::createAstroid() {
 }
 
 void astroidManager::update() {
-    for (auto as: movementSlope) {
+    for (auto &as: movementSlope) {
         as.instance->update(as.slope, as.direct);
     }
     /*
    * deletes out of range astroids and astroids with to greate of slope
    * */
-    int x, y{0};
+    int x, y;
     SDL_GetWindowSize(game->getWindow(), &x, &y);
-    for (int i = 0; i < movementSlope.size(); ++i) {
+    for (size_t i = 0; i < movementSlope.size(); ++i) {
         SDL_Rect *location = movementSlope.at(i).instance->getDestRect();
         if (location->x > x + 2000 || location->x < x - 2000 || movementSlope.at(i).slope > 5) {
             movementSlope.erase(movementSlope.begin() + i);
@@ -64,7 +84,7 @@ void astroidManager::update() {
 }
 
 void astroidManager::render() {
-    for (auto as: movementSlope) {
+    for (auto &as: movementSlope) {
         as.instance->render();
     }
 }
@@ -83,8 +103,6 @@ astroids::astroids(Game *game, int x, int y) : game(game) {
     destRect.x = x;
     destRect.y = y;
 }
-
-astroids::~astroids() {}
 
 void astroids::update(const double &slope, const direction &direct) {
     double nextY{0};
@@ -114,7 +132,6 @@ void astroids::update(const double &slope, const direction &direct) {
 }
 
 void astroids::render() {
-
     SDL_RenderCopy(game->renderer, astroidTex, &srcRect, &destRect);
 }
 
@@ -123,10 +140,12 @@ SDL_Rect *astroids::getDestRect() {
     return temp;
 }
 
+bool coinFlip() {
+    return std::uniform_int_distribution<int>{0, 1}(randomness::engine) == 1;
+}
+
 void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth) {
-    randomXSpawn = (rand() % 1200);
-    // get random cord and give it a random chance of being negative
-    randomXSpawn = (rand() % 10) <= 5 ? randomXSpawn * -1 : randomXSpawn;
+    randomXSpawn = std::uniform_real_distribution<double>{-1200.0, 1200.0}(randomness::engine);
     //uses equation of a circle to find spawn locations
     // y = k + sqrt(r^2 - (x-u)^2)
     if (randomXSpawn > 0) {
@@ -142,7 +161,7 @@ void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &
         randomYSpawn *= -1.f;
     }
     //gives random chance of flipping asteroid
-    if (((rand() % 10)) <= 5 && randomXSpawn < -100) {
+    if (coinFlip() && randomXSpawn < -100) {
         randomXSpawn *= -1.f;
         randomYSpawn *= -1.f;
     }

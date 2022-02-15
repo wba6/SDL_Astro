@@ -4,9 +4,18 @@
 
 #include "Astro/game.h"
 
-Game::Game() : textures(this), Manageprojectiles(this), lost(false), score(0) {}
+Game::Game() : textures(this), score(0), lost(false), Manageprojectiles(this) {}
 
-Game::~Game() { delete playerOne; }
+Game::~Game() {
+    delete playerOne;
+    delete astMan;
+    delete scoreMan;
+    TTF_Quit();
+    SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
+    SDL_Quit();
+    std::cout << "game cleaned" << std::endl;
+}
 
 void Game::init(const char *title, int xpos, int ypos, int width, int height,
                 bool fullscreen) {
@@ -25,7 +34,7 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
         }
 
         // create render
-        renderer = SDL_CreateRenderer(window, -1, flags);
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         if (renderer) {
             SDL_SetRenderDrawColor(renderer, 200, 0, 0, 255);
             std::cout << "Render created" << std::endl;
@@ -42,11 +51,15 @@ void Game::init(const char *title, int xpos, int ypos, int width, int height,
 
 void Game::handleEvents() {
     // gets events
-    SDL_PollEvent(&event);
-    switch (event.type) {
-        case SDL_QUIT:
-            isRunning = false;
-            break;
+    events.clear();
+    SDL_Event event;
+    while (SDL_PollEvent(&event) != 0) {
+        switch (event.type) {
+            case SDL_QUIT:
+                isRunning = false;
+                break;
+        }
+        events.push_back(event);
     }
 }
 
@@ -61,11 +74,10 @@ void Game::update() {
         }
         score += collision::checkCollision(astMan->getMovementSlope(),
                                            Manageprojectiles.getProjectiles());
-
     } else {
         restart();
     }
-        scoreMan->upadateScore(score);
+    scoreMan->upadateScore(score);
 }
 
 void Game::addProjectile(projectile *p) {
@@ -84,14 +96,6 @@ void Game::render() {
     SDL_RenderPresent(renderer);
 }
 
-void Game::clean() {
-    TTF_Quit();
-    SDL_DestroyWindow(window);
-    SDL_DestroyRenderer(renderer);
-    SDL_Quit();
-    std::cout << "game cleaned" << std::endl;
-}
-
 bool Game::running() { return isRunning; }
 
 SDL_Window *Game::getWindow() const {
@@ -107,9 +111,11 @@ void Game::restart() {
     const Uint8 *keys = SDL_GetKeyboardState(&numKeys);
     if (keys[SDL_SCANCODE_R]) {
         astMan->getMovementSlope()->clear();
+        for (auto proj: Manageprojectiles.projectiles) {
+            delete proj;
+        }
         Manageprojectiles.projectiles.clear();
         loseCondition(false);
         score = 0;
     }
 }
-

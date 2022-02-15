@@ -16,13 +16,11 @@ enum direction {
     backwords
 };
 
-class astroids {
+class astroids final {
     Game *game;
 
 public:
     astroids(Game *game, int x, int y);
-
-    virtual ~astroids();
 
     void update(const double &slope, const direction &direct);
 
@@ -39,6 +37,12 @@ struct astroidMovment {
     astroids *instance;
     double slope;
     direction direct;
+
+    astroidMovment(astroids *instance, double slope, direction direct);
+    astroidMovment(const astroidMovment &) = delete;
+    astroidMovment(astroidMovment &&other) noexcept;
+    astroidMovment &operator=(astroidMovment &&other) noexcept;
+    ~astroidMovment();
 };
 
 class astroidManager {
@@ -46,8 +50,6 @@ class astroidManager {
 
 public:
     astroidManager(Game *game, SDL_Window *window);
-
-    ~astroidManager();
 
     void createAstroid();
 

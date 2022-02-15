@@ -11,7 +11,7 @@ class Game;
 
 class scoreManager {
 public:
-    scoreManager(Game *game);
+    explicit scoreManager(Game *game);
 
     ~scoreManager();
 
@@ -21,9 +21,8 @@ public:
 
 private:
     SDL_Rect destRect;
-    Game *Game;
+    Game *game;
     TTF_Font *font;
     SDL_Surface *surface;
     SDL_Texture *texture;
 };
-

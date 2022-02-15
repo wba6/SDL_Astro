@@ -43,6 +43,8 @@ class projectileManager {
 public:
     explicit projectileManager(Game *game);
 
+    ~projectileManager();
+
     std::vector<projectile *> projectiles;
 
     void newProjectile(const SDL_Rect &playerPos, double &angle,

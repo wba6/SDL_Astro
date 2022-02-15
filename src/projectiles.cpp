@@ -2,12 +2,12 @@
 // Created by William Aey on 2/3/2022.
 //
 
-#include "Astro/game.h"
 #include "Astro/projectiles.h"
+#include "Astro/game.h"
 
 projectile::projectile(Game *game, const SDL_Rect &playerPos, double &angle,
                        const int &mousePosX, const int &mousePosY)
-        : game(game) {
+    : game(game) {
     srcRect.x = 0;
     srcRect.y = 0;
     srcRect.w = 64;
@@ -41,6 +41,12 @@ SDL_Rect *projectile::getDestRect() { return &destRect; }
 
 projectileManager::projectileManager(Game *game) : game(game) {}
 
+projectileManager::~projectileManager() {
+    for (auto proj: projectiles) {
+        delete proj;
+    }
+}
+
 void projectileManager::newProjectile(const SDL_Rect &playerPos, double &angle,
                                       const int &mousePosX,
                                       const int &mousePosY) {
@@ -66,18 +72,18 @@ void projectileManager::update() {
     /*
      * deletes out of range projectiles
      * */
-    for (int i = 0; i < projectiles.size(); ++i) {
-        int x, y{0};
-        SDL_GetWindowSize(game->getWindow(), &x, &y);
-        for (int i = 0; i < projectiles.size(); ++i) {
-            SDL_Rect *location = projectiles.at(i)->getDestRect();
-            if (location->x > x + 1000 || location->x < x - 1000) {
-                projectiles.erase(projectiles.begin() + i);
-                i--;
-            } else if (location->y > y + 1000 || location->y < y - 1000) {
-                projectiles.erase(projectiles.begin() + i);
-                i--;
-            }
+    int x, y;
+    SDL_GetWindowSize(game->getWindow(), &x, &y);
+    for (size_t i = 0; i < projectiles.size(); ++i) {
+        SDL_Rect *location = projectiles.at(i)->getDestRect();
+        if (location->x > x + 1000 || location->x < x - 1000) {
+            delete projectiles[i];
+            projectiles.erase(projectiles.begin() + i);
+            i--;
+        } else if (location->y > y + 1000 || location->y < y - 1000) {
+            delete projectiles[i];
+            projectiles.erase(projectiles.begin() + i);
+            i--;
         }
     }
 }

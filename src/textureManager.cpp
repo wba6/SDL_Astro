@@ -2,8 +2,8 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
-#include "Astro/game.h"
 #include "Astro/textureManager.h"
+#include "Astro/game.h"
 
 textureManger::textureManger(Game *game) : game(game) {}
 

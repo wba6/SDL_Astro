@@ -36,14 +36,15 @@ int collision::checkCollision(std::vector<astroidMovment> *movementSlope,
             SDL_bool collision =
                     SDL_HasIntersection(movementSlope->at(i).instance->getDestRect(),
                                         projectiles->at(j)->getDestRect());
-            if (collision == true) {
+            if (collision == SDL_TRUE) {
                 movementSlope->erase(movementSlope->begin() + i);
+                delete (*projectiles)[j];
                 projectiles->erase(projectiles->begin() + j);
                 numberOfCollisions++;
                 i--;
+                j--;
             }
         }
     }
     return numberOfCollisions;
 }
-

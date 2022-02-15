@@ -7,15 +7,15 @@
 #include "Check_collision.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
+#include "SDL2/SDL_ttf.h"
 #include "enemy.h"
 #include "player.h"
 #include "projectiles.h"
-#include "textureManager.h"
-#include "SDL2/SDL_ttf.h"
 #include "scoreManager.h"
+#include "textureManager.h"
 #include <iostream>
-#include <vector>
 #include <map>
+#include <vector>
 
 class Game {
 public:
@@ -32,8 +32,6 @@ public:
 
     void render();
 
-    void clean();
-
     bool running();
 
     void addProjectile(projectile *p);
@@ -45,7 +43,7 @@ public:
     SDL_Window *getWindow() const;
 
     SDL_Renderer *renderer;
-    SDL_Event event;
+    std::vector<SDL_Event> events;
     textureManger textures;
 
 private:

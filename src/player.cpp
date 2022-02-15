@@ -2,8 +2,8 @@
 // Created by TANK1_41 on 1/25/2022.
 //
 
-#include "Astro/game.h"
 #include "Astro/player.h"
+#include "Astro/game.h"
 #include "Astro/textureManager.h"
 
 player::player(Game *game, int x, int y) : game(game) {
@@ -30,12 +30,12 @@ void player::update() {
     spriteAngle = (spriteAngle * 180.f) / 3.141f;
     spriteAngle -= 90;
 
-/*
+    /*
  * spawns new projectiles when left mouse is pressed
  * */
     static int spawnRate{60};
     if (spawnRate >= 60) {
-        if (SDL_GetMouseState(&mouseX, &mouseY) == 1) {
+        if (SDL_GetMouseState(&mouseX, &mouseY) == SDL_BUTTON_LMASK) {
             projectile *shoot = new projectile(game, destRect, spriteAngle, mouseX, mouseY);
             game->addProjectile(shoot);
             spawnRate = 0;
@@ -46,31 +46,36 @@ void player::update() {
     /*
      * checks for keyboard input and applies directional movement
      * */
-    int numKeys;
-    const Uint8 *keys = SDL_GetKeyboardState(&numKeys);
-    if (keys[SDL_SCANCODE_W]) {
-        yVelocity = -1;
-    } else if (keys[SDL_SCANCODE_S]) {
-        yVelocity = 1;
-    } else {
-        yVelocity = 0;
-    }
+    for (const SDL_Event &event: game->events) {
+        if (event.type == SDL_KEYDOWN) {
+            SDL_Keycode key = event.key.keysym.sym;
+            if (key == SDLK_w) {
+                yVelocity = -1;
+            } else if (key == SDLK_s) {
+                yVelocity = 1;
+            }
 
-    if (keys[SDL_SCANCODE_A]) {
-        xVelocity = -1;
-    } else if (keys[SDL_SCANCODE_D]) {
-        xVelocity = 1;
-    } else {
-        xVelocity = 0;
+            if (key == SDLK_a) {
+                xVelocity = -1;
+            } else if (key == SDLK_d) {
+                xVelocity = 1;
+            }
+        } else if (event.type == SDL_KEYUP) {
+            SDL_Keycode key = event.key.keysym.sym;
+            if (key == SDLK_w || key == SDLK_s) {
+                yVelocity = 0;
+            }
+            if (key == SDLK_a || key == SDLK_s) {
+                xVelocity = 0;
+            }
+        }
     }
     int w, h{0};
     SDL_GetWindowSize(game->getWindow(), &w, &h);
     if (yVelocity == 1 && destRect.y < h - 25) {
         ypos += 4;
-
     } else if (yVelocity == -1 && destRect.y > 25) {
         ypos -= 4;
-
     }
 
 
