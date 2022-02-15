@@ -111,6 +111,9 @@ void Game::restart() {
     const Uint8 *keys = SDL_GetKeyboardState(&numKeys);
     if (keys[SDL_SCANCODE_R]) {
         astMan->getMovementSlope()->clear();
+        for (auto proj: Manageprojectiles.projectiles) {
+            delete proj;
+        }
         Manageprojectiles.projectiles.clear();
         loseCondition(false);
         score = 0;

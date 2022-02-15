@@ -6,7 +6,7 @@
 #include "Astro/game.h"
 #include "string.h"
 
-scoreManager::scoreManager(Game *game) : surface(nullptr), texture(nullptr), game(game) {
+scoreManager::scoreManager(Game *game) : game(game), surface(nullptr), texture(nullptr) {
     destRect.x = 15;
     destRect.w = 100;
     destRect.y = 15;
@@ -16,7 +16,7 @@ scoreManager::scoreManager(Game *game) : surface(nullptr), texture(nullptr), gam
 
 void scoreManager::upadateScore(const int score) {
     std::string scoreString = "Score: " + std::to_string(score);
-    surface = TTF_RenderText_Solid(font, scoreString.c_str(), {0, 0, 0});
+    surface = TTF_RenderText_Solid(font, scoreString.c_str(), {0, 0, 0, 255});
     texture = SDL_CreateTextureFromSurface(game->renderer, surface);
     SDL_FreeSurface(surface);
 }

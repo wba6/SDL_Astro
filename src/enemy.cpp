@@ -9,14 +9,29 @@
 
 void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth);
 
-astroidManager::astroidManager(Game *game, SDL_Window *window) : game(game) {
-    SDL_GetWindowSize(window, &windowWidth, &windowHight);
+
+astroidMovment::astroidMovment(astroidMovment &&other) noexcept : instance(other.instance), slope(other.slope), direct(other.direct) {
+    other.instance = nullptr;
+}
+astroidMovment &astroidMovment::operator=(astroidMovment &&other) noexcept {
+    if (&other != this) {
+        delete instance;
+        instance = other.instance;
+        slope = other.slope;
+        direct = other.direct;
+        other.instance = nullptr;
+    }
+
+    return *this;
+}
+astroidMovment::astroidMovment(astroids *instance, double slope, direction direct) : instance(instance), slope(slope), direct(direct) {
+}
+astroidMovment::~astroidMovment() {
+    delete instance;
 }
 
-astroidManager::~astroidManager() {
-    for (auto& ast : movementSlope) {
-        delete ast.instance;
-    }
+astroidManager::astroidManager(Game *game, SDL_Window *window) : game(game) {
+    SDL_GetWindowSize(window, &windowWidth, &windowHight);
 }
 
 void astroidManager::createAstroid() {
@@ -36,9 +51,9 @@ void astroidManager::createAstroid() {
         auto *ast = new astroids(game, randomXSpawn, randomYSpawn);
 
         if (randomXSpawn > windowWidth) {
-            movementSlope.push_back({ast, slope, backwords});
+            movementSlope.emplace_back(ast, slope, backwords);
         } else {
-            movementSlope.push_back({ast, slope, forward});
+            movementSlope.emplace_back(ast, slope, forward);
         }
         frameCounter = 0;
     } else {
@@ -47,22 +62,20 @@ void astroidManager::createAstroid() {
 }
 
 void astroidManager::update() {
-    for (auto as: movementSlope) {
+    for (auto &as: movementSlope) {
         as.instance->update(as.slope, as.direct);
     }
     /*
    * deletes out of range astroids and astroids with to greate of slope
    * */
-    int x, y{0};
+    int x, y;
     SDL_GetWindowSize(game->getWindow(), &x, &y);
     for (size_t i = 0; i < movementSlope.size(); ++i) {
         SDL_Rect *location = movementSlope.at(i).instance->getDestRect();
         if (location->x > x + 2000 || location->x < x - 2000 || movementSlope.at(i).slope > 5) {
-            delete movementSlope[i].instance;
             movementSlope.erase(movementSlope.begin() + i);
             i--;
         } else if (location->y > y + 2000 || location->y < y - 2000 || movementSlope.at(i).slope < -5) {
-            delete movementSlope[i].instance;
             movementSlope.erase(movementSlope.begin() + i);
             i--;
         }
@@ -70,7 +83,7 @@ void astroidManager::update() {
 }
 
 void astroidManager::render() {
-    for (auto as: movementSlope) {
+    for (auto &as: movementSlope) {
         as.instance->render();
     }
 }
@@ -89,8 +102,6 @@ astroids::astroids(Game *game, int x, int y) : game(game) {
     destRect.x = x;
     destRect.y = y;
 }
-
-astroids::~astroids() {}
 
 void astroids::update(const double &slope, const direction &direct) {
     double nextY{0};
@@ -120,7 +131,6 @@ void astroids::update(const double &slope, const direction &direct) {
 }
 
 void astroids::render() {
-
     SDL_RenderCopy(game->renderer, astroidTex, &srcRect, &destRect);
 }
 

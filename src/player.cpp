@@ -35,7 +35,7 @@ void player::update() {
  * */
     static int spawnRate{60};
     if (spawnRate >= 60) {
-        if (SDL_GetMouseState(&mouseX, &mouseY) == 1) {
+        if (SDL_GetMouseState(&mouseX, &mouseY) == SDL_BUTTON_LMASK) {
             projectile *shoot = new projectile(game, destRect, spriteAngle, mouseX, mouseY);
             game->addProjectile(shoot);
             spawnRate = 0;
