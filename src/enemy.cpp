@@ -4,6 +4,7 @@
 
 #include "Astro/enemy.h"
 #include "Astro/game.h"
+#include "Astro/randomness.h"
 #include "Astro/textureManager.h"
 
 
@@ -139,10 +140,12 @@ SDL_Rect *astroids::getDestRect() {
     return temp;
 }
 
+bool coinFlip() {
+    return std::uniform_int_distribution<int>{0, 1}(randomness::engine) == 1;
+}
+
 void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &windHight, const int &windWidth) {
-    randomXSpawn = (rand() % 1200);
-    // get random cord and give it a random chance of being negative
-    randomXSpawn = (rand() % 10) <= 5 ? randomXSpawn * -1 : randomXSpawn;
+    randomXSpawn = std::uniform_real_distribution<double>{-1200.0, 1200.0}(randomness::engine);
     //uses equation of a circle to find spawn locations
     // y = k + sqrt(r^2 - (x-u)^2)
     if (randomXSpawn > 0) {
@@ -158,7 +161,7 @@ void generateRandomXCord(double &randomXSpawn, double &randomYSpawn, const int &
         randomYSpawn *= -1.f;
     }
     //gives random chance of flipping asteroid
-    if (((rand() % 10)) <= 5 && randomXSpawn < -100) {
+    if (coinFlip() && randomXSpawn < -100) {
         randomXSpawn *= -1.f;
         randomYSpawn *= -1.f;
     }
