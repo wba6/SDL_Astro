@@ -1,7 +1,8 @@
 #include "Astro/game.h"
 #include <ctime>
 
-int main() {
+//parameters required for windows build
+int main(int argv, char **args) {
     // limit the frame rate
     const int fps = 120;
     const int frameDelay = 1000 / fps;
