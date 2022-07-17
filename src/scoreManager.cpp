@@ -4,7 +4,7 @@
 
 #include "Astro/scoreManager.h"
 #include "Astro/game.h"
-#include "string.h"
+#include <string>
 
 scoreManager::scoreManager(Game *game) : game(game), surface(nullptr), texture(nullptr) {
     destRect.x = 15;
