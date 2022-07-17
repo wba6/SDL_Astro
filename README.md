@@ -1,8 +1,4 @@
 # SDL_Astro
-A game similar to astroids with a few extra features built in c++ using SDL2
+A surviual game where you try to avoid the astroids and while shooting them to gain points
 
-**How to Play**
--Download Zip
--Extract Files
--Run SDL_Astro.exe
--Press R to restart if you lose
+
