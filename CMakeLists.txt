@@ -26,3 +26,11 @@ target_link_libraries(
         SDL2_image
         SDL2_ttf.dll
 )
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/lib/x64 ${PROJECT_SOURCE_DIR}/cmake-build-debug
+)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory ${PROJECT_SOURCE_DIR}/assets ${PROJECT_SOURCE_DIR}/cmake-build-debug/assets
+)
